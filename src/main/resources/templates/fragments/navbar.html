@@ -1,0 +1,31 @@
+<header th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">\
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/dashboard">Welcome, <span th:text="${client.getFirstName()}"></span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item mr-auto">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/tab1">Tab 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/tab2">Tab 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/tab3">Tab 3</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/tab4">Tab 4</a>
+                </li>
+                <li class="nav-item">
+                    <a class="mx-md-3" href="/logout"><button class="btn btn-outline-danger" type="submit">Log Out</button></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card-deck mb-3 text-center">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Module 1</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Future <small class="text-muted">Development</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Lorem ipsum dolor si</li>
+                            <li> consectetur adipiscing elit</li>
+                            <li> Praesent elementum, nulla</li>
+                            <li>eros tortor vehicula lorem</li>
+                        </ul>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Something</button>
+                    </div>
+                </div>
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Module 2</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Future <small class="text-muted">Development</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Lorem ipsum dolor si</li>
+                            <li> consectetur adipiscing elit</li>
+                            <li> Praesent elementum, nulla</li>
+                            <li>eros tortor vehicula lorem</li>
+                        </ul>
+                        <button type="button" class="btn btn-lg btn-block btn-primary">Something</button>
+                    </div>
+                </div>
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Module 3</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Future <small class="text-muted">Development</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Lorem ipsum dolor si</li>
+                            <li> consectetur adipiscing elit</li>
+                            <li> Praesent elementum, nulla</li>
+                            <li>eros tortor vehicula lorem</li>
+                        </ul>
+                        <button type="button" class="btn btn-lg btn-block btn-secondary">Something</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<h1 th:text="${client.toString()}">Dashboard</h1>-->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <div th:replace="fragments/body-scripts :: body-scripts"></div>
+
+</body>
+</html>
