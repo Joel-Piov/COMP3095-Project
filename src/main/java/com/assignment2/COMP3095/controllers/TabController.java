@@ -24,40 +24,40 @@ public class TabController {
 
     String redirectUrl = "redirect:/login";
 
-    @RequestMapping(value="dashboard/tab1", method = RequestMethod.GET )
-    public String tab1(
+    @RequestMapping(value="dashboard/profile", method = RequestMethod.GET )
+    public String profile(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "wip", model, "Tab 1", session);
+        return checkAccess(redirectAttr, "wip", model, "Profile", session);
     }
 
-    @RequestMapping(value="dashboard/tab2", method = RequestMethod.GET )
-    public String tab2(
+    @RequestMapping(value="dashboard/credit", method = RequestMethod.GET )
+    public String credit(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "wip", model, "Tab 2", session);
+        return checkAccess(redirectAttr, "wip", model, "Credit Profile", session);
     }
 
-    @RequestMapping(value="dashboard/tab3", method = RequestMethod.GET )
-    public String tab3(
+    @RequestMapping(value="dashboard/inbox", method = RequestMethod.GET )
+    public String inbox(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "wip", model, "Tab 3", session);
+        return checkAccess(redirectAttr, "wip", model, "Inbox", session);
     }
 
-    @RequestMapping(value="dashboard/tab4", method = RequestMethod.GET)
-    public String tab4(
+    @RequestMapping(value="dashboard/support", method = RequestMethod.GET)
+    public String support(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "wip", model, "Tab 4", session);
+        return checkAccess(redirectAttr, "wip", model, "Support", session);
     }
 
     //function that checks access privileges and reroutes

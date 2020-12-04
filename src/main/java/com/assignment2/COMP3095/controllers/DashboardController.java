@@ -49,8 +49,11 @@ public class DashboardController {
             redAtt.addFlashAttribute("loginRequired", true);
             return url;
         }
-        else if(client.getRole().equals("Client") || client.getRole().equals("Admin")) {
+        else if(client.getRole().equals("Client")) {
             return "/dashboard";
+        }
+        else if(client.getRole().equals("Admin")) {
+            return "/dashboard-admin";
         }
         else{
             redAtt.addFlashAttribute("loginRequired", true);
