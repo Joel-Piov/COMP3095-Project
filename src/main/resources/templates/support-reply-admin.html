@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<div th:replace="fragments/navbar :: navbar"></div>
+<div th:replace="fragments/navbar-admin :: navbar-admin"></div>
 <div class="container-fluid">
     <div class="row mt-5">
         <div class="col-md-12">
@@ -19,6 +19,11 @@
 
                     <div class="card-body">
                         <form>
+                            <div class="form-group">
+                                <label for="ticketNum" class="sr-only">Email address</label>
+                                <input type="text" id="ticketNum" class="form-control" placeholder="0000"  >
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
@@ -43,7 +48,7 @@
                                 <input type="text" id="postalCode" class="form-control" placeholder="Enter message here...">
                             </div>
 
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Add/Update</button>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
                             <br/>
                         </form>
                     </div>

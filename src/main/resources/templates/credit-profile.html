@@ -1,10 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
+
 <body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<h2>Credit Information Profile</h2>
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card-deck mb-3 text-center">
+                <div class="card mb-4 box-shadow">
+
+                    <div class="card-header">
+                        <h2 class="my-0 font-weight-normal">Add New Card</h2>
+                    </div>
+
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="mastercard">Master Card</label>
+                                        <input type="radio" id="mastercard" class="form-control" name="mastercard" >
+
+                                        <label for="visa">VISA</label>
+                                        <input type="radio" id="visa" class="form-control" name="visa" >
+
+                                        <label for="amex">American Express</label>
+                                        <input type="radio" id="amex" class="form-control" name="amex" >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="expireDate" >Expiration Date</label>
+                                <input type="date" id="expireDate" class="form-control" name="expireDate">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cardHolder" >Card Holder Name</label>
+                                <input type="text" id="cardHolder" class="form-control" name="cardHolder">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ccNumber">Credit Card Number</label>
+                                <input type="text" id="ccNumber" class="form-control" name="ccNumber">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="preference">Save as Preferred Card</label>
+                                <input type="checkbox" id="preference" class="form-control" name="preference">
+                            </div>
+
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Add/Update</button>
+                            <br/>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card-deck mb-3 text-center">
+                <div class="card mb-4 box-shadow">
+
+                    <div class="card-header">
+                        <h2 class="my-0 font-weight-normal">Existing Cards</h2>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <p>Type: </p>
+                                    <p>Mastercard</p>
+                                </div>
+                                <div class="form-group">
+                                    <p>Expiry: </p>
+                                    <p>01/2021</p>
+                                </div>
+                                <div class="form-group">
+                                    <p>Card Holder: </p>
+                                    <p>Jane Smith</p>
+                                </div>
+                                <div class="form-group">
+                                    <p>Card Number: </p>
+                                    <p>**** **** **** *999</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!--<h1 th:text="${client.toString()}">Dashboard</h1>-->
+<div th:replace="fragments/body-scripts :: body-scripts"></div>
 
 </body>
 </html>
