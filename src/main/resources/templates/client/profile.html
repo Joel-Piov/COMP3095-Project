@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form>
+                            <form th:action="@{/edit}" th:object="${client}" method="PUT">
 <!--                                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="alert alert-danger"></p>-->
 <!--                                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger"></p>-->
 <!--                                <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></p>-->
@@ -31,7 +31,7 @@
                                         <div class="form-group">
                                             <label for="firstName" class="sr-only">First Name</label>
 <!--                                            <input type="text" id="firstName" th:field="*{firstName}" class="form-control" placeholder="First Name" >-->
-                                            <input type="text" id="firstName" class="form-control" placeholder="First Name" >
+                                            <input type="text" id="firstName" class="form-control" th:value="${client.getFirstName()}">
                                         </div>
                                     </div>
 
@@ -39,7 +39,7 @@
                                         <div class="form-group">
                                             <label for="lastName" class="sr-only">Last Name</label>
 <!--                                            <input type="text" id="lastName" th:field="*{lastName}" class="form-control" placeholder="Last Name" >-->
-                                            <input type="text" id="lastName" class="form-control" placeholder="Last Name" >
+                                            <input type="text" id="lastName" class="form-control" th:value="${client.getLastName()}">
 
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
 
                                 <div class="form-group">
                                     <label for="inputEmail" class="sr-only">Email address</label>
-                                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address"  >
+                                    <input type="email" id="inputEmail" class="form-control" th:value="${client.getEmail()}">
                                 </div>
 
                                 <div class="form-group">
@@ -58,20 +58,17 @@
 
                                 <div class="form-group">
                                     <label for="address" class="sr-only">Address</label>
-<!--                                    <input type="text" id="address" th:field="*{address}" class="form-control" placeholder="123 Example Street" >-->
-                                    <input type="text" id="address" class="form-control" placeholder="123 Example Street" >
+                                    <input type="text" id="address" class="form-control" th:value="${client.getAddress()}" >
                                 </div>
 
                                 <div class="form-group">
                                     <label for="city" class="sr-only">City</label>
-                                    <!--                                    <input type="text" id="address" th:field="*{address}" class="form-control" placeholder="123 Example Street" >-->
-                                    <input type="text" id="city" class="form-control" placeholder="Toronto" >
+                                    <input type="text" id="city" class="form-control" th:value="${client.getCity()}" >
                                 </div>
 
                                 <div class="form-group">
                                     <label for="country" class="sr-only">Country</label>
-                                    <!--                                    <input type="text" id="address" th:field="*{address}" class="form-control" placeholder="123 Example Street" >-->
-                                    <select id="country" name="country">
+                                    <select id="country" name="country" th:value="${client.getCountry()}">
                                         <option value="Afganistan">Afghanistan</option>
                                         <option value="Albania">Albania</option>
                                         <option value="Algeria">Algeria</option>
@@ -318,22 +315,22 @@
                                         <option value="Zaire">Zaire</option>
                                         <option value="Zambia">Zambia</option>
                                         <option value="Zimbabwe">Zimbabwe</option>
-                                    </select>
+                                    </select >
                                 </div>
 
                                 <div class="form-group">
                                     <label class="sr-only">Postal Code</label>
-                                    <input type="text" id="postalCode" name="postalCode" placeholder="A1A 1A1">
+                                    <input type="text" id="postalCode" name="postalCode" th:value="${client.getPostalCode()}">
                                 </div>
 
                                 <div class="form-group">
                                     <p class="sr-only">Default Billing Address</p>
-                                    <input type="checkbox" id="checkBilling" name="checkBilling" placeholder="A1A 1A1">
+                                    <input type="checkbox" id="checkBilling" name="checkBilling">
                                 </div>
 
                                 <div class="form-group">
                                     <p class="sr-only">Default Shipping Address</p>
-                                    <input type="checkbox" id="checkShipping" name="checkShipping" placeholder="A1A 1A1">
+                                    <input type="checkbox" id="checkShipping" name="checkShipping">
                                 </div>
 
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">Add/Update</button>

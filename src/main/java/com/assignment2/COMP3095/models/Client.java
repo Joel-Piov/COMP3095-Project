@@ -42,6 +42,9 @@ public class Client {
     private String lastName;
 
     @NotNull
+    private String dob;
+
+    @NotNull
     @Pattern(regexp = "^\\d+\\s[A-z]+\\s[A-z]+$", message = "Invalid Address - (ex: 123 Example Street)")
     private String address;
 
@@ -134,6 +137,14 @@ public class Client {
         this.country = country;
     }
 
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
@@ -142,6 +153,7 @@ public class Client {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", date of birth='" + dob + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +

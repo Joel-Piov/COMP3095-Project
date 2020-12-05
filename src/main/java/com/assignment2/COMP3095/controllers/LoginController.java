@@ -63,7 +63,6 @@ public class LoginController {
                             RedirectAttributes redirectAttr,
 //                            @RequestParam(name="g-recaptcha-response") String recaptchaResponse,
                             HttpServletRequest request
-
     ) {
 //        String ip = request.getRemoteAddr();
 //        String captchaVerifyMessage =

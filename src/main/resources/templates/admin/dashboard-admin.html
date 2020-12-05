@@ -13,7 +13,6 @@
                         <h2 class="my-0 font-weight-normal">ADMIN Profile</h2>
                     </div>
                     <div class="card-body">
-<!--                        <h1 class="card-title pricing-card-title">Future <small class="text-muted">Development</small></h1>-->
                         <h3><small class="text-muted">Last Login Activity</small></h3>
                         <ul class="list-unstyled mt-3 mb-4">
                             <li>Get date</li>
@@ -34,11 +33,19 @@
                         <h4 class="my-0 font-weight-normal">Current Profile</h4>
                     </div>
                     <div class="card-body">
-<!--                        <h3 class="card-title pricing-card-title"><small class="text-muted">Development</small></h3>-->
                         <ul class="list-unstyled mt-3 mb-4">
-                            <li>First Name</li>
-                            <li>Last Name</li>
-                            <li>Email</li>
+                            <div>
+                                <li>First Name:</li>
+                                <span th:text="${client.getFirstName()}"></span>
+                            </div>
+                            <div>
+                                <li>Last Name:</li>
+                                <span th:text="${client.getLastName()}"></span>
+                            </div>
+                            <div>
+                                <li>Email:</li>
+                                <span th:text="${client.getEmail()}"></span>
+                            </div>
                         </ul>
                     </div>
                 </div>
