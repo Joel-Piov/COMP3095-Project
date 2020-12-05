@@ -16,8 +16,10 @@ import javax.validation.constraints.*;
 @SequenceGenerator(name="client_id_seq", initialValue=3, allocationSize=100)
 public class Client {
 
+
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="client_id_seq")
+    //@OneToMany(mappedBy="card", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private long id;
 
     @NotEmpty(message="Email field should not be empty")

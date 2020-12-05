@@ -31,7 +31,7 @@ public class RegistrationController {
     public String register(Model model){
         Client client = new Client();
         model.addAttribute("client", client);
-        return "register";
+        return "client/register";
     }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
@@ -42,10 +42,10 @@ public class RegistrationController {
     {
         if(client.getPassword().equals(confirmPassword)) {
             if (br.hasErrors()) {
-                return "register";
+                return "client/register";
             } else {
                 if (repo.findByEmail(client.getEmail()) != null) {
-                    return "register";
+                    return "client/register";
                 } else {
                     client.setRole("Client");
                     repo.save(client);
@@ -55,7 +55,7 @@ public class RegistrationController {
             }
         } else {
             model.addAttribute("InvalidConfirm", true);
-            return "register";
+            return "client/register";
         }
     }
 

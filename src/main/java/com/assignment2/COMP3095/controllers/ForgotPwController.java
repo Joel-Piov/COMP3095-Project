@@ -28,7 +28,7 @@ public class ForgotPwController {
     public String retrievePw(User user, Model model)
     {
         model.addAttribute("user", user);
-        return "forgotPassword";
+        return "shared/forgotPassword";
     }
 
     @RequestMapping(value = "/login/forgotPassword", method = RequestMethod.POST)
@@ -37,12 +37,12 @@ public class ForgotPwController {
         if(repo.findByEmail(user.getUsername()) == null)
         {
             model.addAttribute("pwResetFail", true);
-            return "forgotPassword";
+            return "shared/forgotPassword";
         }
         else
         {
             model.addAttribute("pwResetSuccess", true);
-            return "forgotPassword";
+            return "shared/forgotPassword";
         }
     }
 }

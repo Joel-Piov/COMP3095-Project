@@ -32,7 +32,7 @@ public class TabController {
             Model model,
             HttpSession session
     ){
-        return checkBothAccess(redirectAttr, "profile", "profile-admin", model, "Profile", session);
+        return checkBothAccess(redirectAttr, "client/profile", "admin/profile-admin", model, "Profile", session);
     }
 
     //Inbox Tab
@@ -42,7 +42,7 @@ public class TabController {
             Model model,
             HttpSession session
     ){
-        return checkBothAccess(redirectAttr, "inbox","inbox-admin", model, "Inbox", session);
+        return checkBothAccess(redirectAttr, "client/inbox","admin/inbox-admin", model, "Inbox", session);
     }
 
     //======================================CLIENT TABS==============================================================//
@@ -54,7 +54,7 @@ public class TabController {
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "credit-profile", model, "Credit Profile", session);
+        return checkAccess(redirectAttr, "client/credit-profile", model, "Credit Profile", session);
     }
 
     //Support Tab
@@ -64,7 +64,7 @@ public class TabController {
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "support", model, "Support", session);
+        return checkAccess(redirectAttr, "client/support", model, "Support", session);
     }
 
     //======================================ADMIN TABS==============================================================//
@@ -76,17 +76,17 @@ public class TabController {
                 Model model,
                 HttpSession session
         ){
-            return checkAccess(redirectAttr, "userListing-admin", model, "Clients", session);
+            return checkAccess(redirectAttr, "admin/userListing-admin", model, "Clients", session);
         }
 
-    //User Listings Tab
+    //Admin Listings Tab
     @RequestMapping(value="dashboard/admin-listings", method = RequestMethod.GET)
     public String adminListing(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "adminListing-admin", model, "Admins", session);
+        return checkAccess(redirectAttr, "admin/adminListing-admin", model, "Admins", session);
     }
 
     //======================================CHECK FUNCTIONS=========================================================//

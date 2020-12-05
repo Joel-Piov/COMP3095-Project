@@ -50,10 +50,10 @@ public class DashboardController {
             return url;
         }
         else if(client.getRole().equals("Client")) {
-            return "/dashboard";
+            return "client/dashboard";
         }
         else if(client.getRole().equals("Admin")) {
-            return "/dashboard-admin";
+            return "admin/dashboard-admin";
         }
         else{
             redAtt.addFlashAttribute("loginRequired", true);
