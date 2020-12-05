@@ -44,6 +44,18 @@ public class Client {
     @NotNull
     @Pattern(regexp = "^\\d+\\s[A-z]+\\s[A-z]+$", message="Invalid Address - (ex: 123 Example Street)")
     private String address;
+
+    @NotNull
+    @Size(min=2,message="City should be more than 2 characters.")
+    private String city;
+
+    @NotNull
+    private String country;
+
+    @NotNull
+    @Pattern(regexp = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$")
+    private String postalCode;
+
     private String role;
 
     public long getId() { return id; }
@@ -93,6 +105,30 @@ public class Client {
         this.address = address;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
@@ -102,6 +138,9 @@ public class Client {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", postalCode='" + postalCode + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }
