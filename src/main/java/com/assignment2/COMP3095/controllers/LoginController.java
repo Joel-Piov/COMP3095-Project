@@ -61,20 +61,20 @@ public class LoginController {
                             Model model,
                             HttpSession session,
                             RedirectAttributes redirectAttr,
-                            @RequestParam(name="g-recaptcha-response") String recaptchaResponse,
+//                            @RequestParam(name="g-recaptcha-response") String recaptchaResponse,
                             HttpServletRequest request
 
     ) {
-        String ip = request.getRemoteAddr();
-        String captchaVerifyMessage =
-                captchaService.verifyRecaptcha(ip, recaptchaResponse);
-
-        if (StringUtils.isNotEmpty(captchaVerifyMessage)) {
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", captchaVerifyMessage);
-            model.addAttribute("invalidCaptcha", true);
-            return "index";
-        } else {
+//        String ip = request.getRemoteAddr();
+//        String captchaVerifyMessage =
+//                captchaService.verifyRecaptcha(ip, recaptchaResponse);
+//
+//        if (StringUtils.isNotEmpty(captchaVerifyMessage)) {
+//            Map<String, Object> response = new HashMap<>();
+//            response.put("message", captchaVerifyMessage);
+//            model.addAttribute("invalidCaptcha", true);
+//            return "index";
+//        } else {
             if (user.getUsername().equals("") || user.getPassword().equals("")) {
                 return "index";
             } else {
@@ -93,6 +93,6 @@ public class LoginController {
                     }
                 }
             }
-        }
+//        }
     }
 }
