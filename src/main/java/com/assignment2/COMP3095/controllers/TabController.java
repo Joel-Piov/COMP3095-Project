@@ -32,7 +32,7 @@ public class TabController {
             Model model,
             HttpSession session
     ){
-        return checkBothAccess(redirectAttr, "client/profile", "admin/profile-admin", model, "Profile", session);
+        return checkSharedAccess(redirectAttr, "client/profile", "admin/profile-admin", model, "Profile", session);
     }
 
     //Inbox Tab
@@ -42,7 +42,7 @@ public class TabController {
             Model model,
             HttpSession session
     ){
-        return checkBothAccess(redirectAttr, "client/inbox","admin/inbox-admin", model, "Inbox", session);
+        return checkSharedAccess(redirectAttr, "client/inbox","admin/inbox-admin", model, "Inbox", session);
     }
 
     //======================================CLIENT TABS==============================================================//
@@ -54,7 +54,7 @@ public class TabController {
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "client/credit-profile", model, "Credit Profile", session);
+        return checkClientAccess(redirectAttr, "client/credit-profile", model, "Credit Profile", session);
     }
 
     //Support Tab
@@ -64,7 +64,7 @@ public class TabController {
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "client/support", model, "Support", session);
+        return checkClientAccess(redirectAttr, "client/support", model, "Support", session);
     }
 
     //======================================ADMIN TABS==============================================================//
@@ -76,7 +76,7 @@ public class TabController {
                 Model model,
                 HttpSession session
         ){
-            return checkAccess(redirectAttr, "admin/userListing-admin", model, "Clients", session);
+            return checkAdminAccess(redirectAttr, "admin/userListing-admin", model, "Clients", session);
         }
 
     //Admin Listings Tab
@@ -86,13 +86,13 @@ public class TabController {
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "admin/adminListing-admin", model, "Admins", session);
+        return checkAdminAccess(redirectAttr, "admin/adminListing-admin", model, "Admins", session);
     }
 
     //======================================CHECK FUNCTIONS=========================================================//
 
     //function that checks access privileges and reroutes
-    private String checkAccess(
+    private String checkClientAccess(
             RedirectAttributes redAtt,
             String viewName,
             Model modelName,
@@ -104,7 +104,7 @@ public class TabController {
         if (client == null) {
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;
-        } else if (client.getRole().equals("Client") || client.getRole().equals("Admin")) {
+        } else if (client.getRole().equals("Client")) {
             modelName.addAttribute("title", tabTitle);
             return viewName;
         } else {
@@ -113,7 +113,30 @@ public class TabController {
         }
     }
 
-    private String checkBothAccess(
+    //function that checks access privileges and reroutes
+    private String checkAdminAccess(
+            RedirectAttributes redAtt,
+            String viewName,
+            Model modelName,
+            String tabTitle,
+            HttpSession sessionName
+    ) {
+        Client client = (Client) sessionName.getAttribute("client");
+
+        if (client == null) {
+            redAtt.addFlashAttribute("loginRequired", true);
+            return redirectUrl;
+        } else if (client.getRole().equals("Admin")) {
+            modelName.addAttribute("title", tabTitle);
+            return viewName;
+        } else {
+            redAtt.addFlashAttribute("loginRequired", true);
+            return redirectUrl;
+        }
+    }
+
+
+    private String checkSharedAccess(
         RedirectAttributes redAtt,
         String viewNameClient,
         String viewNameAdmin,
