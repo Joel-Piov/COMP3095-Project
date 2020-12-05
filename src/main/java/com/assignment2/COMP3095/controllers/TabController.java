@@ -23,40 +23,16 @@ public class TabController {
 
     String redirectUrl = "redirect:/login";
 
-    //Profile Tab --------- Checks to see if the user is a Client or Admin and provides the correct profile page
+    //======================================SHARED TABS==============================================================//
+
+    //Profile Tab ---------> Checks to see if the user is a Client or Admin and provides the correct profile page
     @RequestMapping(value="dashboard/profile", method = RequestMethod.GET )
     public String profile(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session
     ){
-        Client client = (Client)session.getAttribute("client");
-        if(client == null){
-            redirectAttr.addFlashAttribute("loginRequired", true);
-            return redirectUrl;
-        }
-        else if(client.getRole().equals("Client"))
-        {
-            return checkAccess(redirectAttr, "profile", model, "Profile", session);
-
-        }
-        else if (client.getRole().equals("Admin")){
-            return checkAccess(redirectAttr, "profile-admin", model, "Profile", session);
-        }
-        else {
-            redirectAttr.addFlashAttribute("loginRequired", true);
-            return redirectUrl;
-        }
-    }
-
-    //Credit Info Tab
-    @RequestMapping(value="dashboard/credit", method = RequestMethod.GET )
-    public String credit(
-            RedirectAttributes redirectAttr,
-            Model model,
-            HttpSession session
-    ){
-        return checkAccess(redirectAttr, "credit-profile", model, "Credit Profile", session);
+        return checkBothAccess(redirectAttr, "profile", "profile-admin", model, "Profile", session);
     }
 
     //Inbox Tab
@@ -66,7 +42,19 @@ public class TabController {
             Model model,
             HttpSession session
     ){
-        return checkAccess(redirectAttr, "inbox", model, "Inbox", session);
+        return checkBothAccess(redirectAttr, "inbox","inbox-admin", model, "Inbox", session);
+    }
+
+    //======================================CLIENT TABS==============================================================//
+
+    //Credit Info Tab
+    @RequestMapping(value="dashboard/credit", method = RequestMethod.GET )
+    public String credit(
+            RedirectAttributes redirectAttr,
+            Model model,
+            HttpSession session
+    ){
+        return checkAccess(redirectAttr, "credit-profile", model, "Credit Profile", session);
     }
 
     //Support Tab
@@ -79,29 +67,7 @@ public class TabController {
         return checkAccess(redirectAttr, "support", model, "Support", session);
     }
 
-    //=====================================ADMIN TABS================================================================//
-//
-//    //Admin Profile Tab
-//    @RequestMapping(value="dashboard/profile", method = RequestMethod.GET )
-//    public String profile_admin(
-//            RedirectAttributes redirectAttr,
-//            Model model,
-//            HttpSession session
-//    ){
-//        return checkAccess(redirectAttr, "profile-admin", model, "Profile", session);
-//    }
-//
-//    //Admin Inbox Tab
-//    @RequestMapping(value="dashboard/inbox", method = RequestMethod.GET )
-//    public String inbox_admin(
-//            RedirectAttributes redirectAttr,
-//            Model model,
-//            HttpSession session
-//    ){
-//        return checkAccess(redirectAttr, "inbox-admin", model, "Inbox", session);
-//    }
-//
-//
+    //======================================ADMIN TABS==============================================================//
 
     //function that checks access privileges and reroutes
     private String checkAccess(
@@ -110,6 +76,28 @@ public class TabController {
             Model modelName,
             String tabTitle,
             HttpSession sessionName
+    ) {
+        Client client = (Client) sessionName.getAttribute("client");
+
+        if (client == null) {
+            redAtt.addFlashAttribute("loginRequired", true);
+            return redirectUrl;
+        } else if (client.getRole().equals("Client") || client.getRole().equals("Admin")) {
+            modelName.addAttribute("title", tabTitle);
+            return viewName;
+        } else {
+            redAtt.addFlashAttribute("loginRequired", true);
+            return redirectUrl;
+        }
+    }
+
+    private String checkBothAccess(
+        RedirectAttributes redAtt,
+        String viewNameClient,
+        String viewNameAdmin,
+        Model modelName,
+        String tabTitle,
+        HttpSession sessionName
     ){
         Client client = (Client)sessionName.getAttribute("client");
 
@@ -117,14 +105,22 @@ public class TabController {
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;
         }
-        else if(client.getRole().equals("Client") || client.getRole().equals("Admin"))
+        else if(client.getRole().equals("Client"))
         {
             modelName.addAttribute("title", tabTitle);
-            return viewName;
+            return viewNameClient;
+        }
+        else if(client.getRole().equals("Admin"))
+        {
+            modelName.addAttribute("title", tabTitle);
+            return viewNameAdmin;
         }
         else{
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;
         }
     }
+
+
+
 }
