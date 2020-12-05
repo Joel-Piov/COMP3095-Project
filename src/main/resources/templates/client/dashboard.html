@@ -36,12 +36,34 @@
                     <div class="card-body">
 <!--                        <h3 class="card-title pricing-card-title"><small class="text-muted">Development</small></h3>-->
                         <ul class="list-unstyled mt-3 mb-4">
-                            <li>First Name</li>
-                            <li>Last Name</li>
-                            <li>Email</li>
-                            <li>Address</li>
-                            <li>City</li>
-                            <li>Country</li>
+                            <div>
+                                <li>First Name:</li>
+                                <span th:text="${client.getFirstName()}"></span>
+                            </div>
+                            <div>
+                                <li>Last Name:</li>
+                                <span th:text="${client.getLastName()}"></span>
+                            </div>
+                            <div>
+                                <li>Email:</li>
+                                <span th:text="${client.getEmail()}"></span>
+                            </div>
+                            <div>
+                                <li>Address:</li>
+                                <span th:text="${client.getAddress()}"></span>
+                            </div>
+                            <div>
+                                <li>City:</li>
+                                <span th:text="${client.getCity()}"></span>
+                            </div>
+                            <div>
+                                <li>Country:</li>
+                                <span th:text="${client.getCountry()}"></span>
+                            </div>
+                            <div>
+                                <li>Postal Code:</li>
+                                <span th:text="${client.getPostalCode()}"></span>
+                            </div>
                         </ul>
                     </div>
                 </div>
