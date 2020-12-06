@@ -15,7 +15,7 @@
                 <div class="card mb-4 box-shadow">
 
                     <div class="card-header">
-                        <h2 class="my-0 font-weight-normal">Add/Edit Profile</h2>
+                        <h2 class="my-0 font-weight-normal">Edit Profile</h2>
                     </div>
 
                     <div class="card-body">
@@ -85,7 +85,7 @@
                                 <input type="text" id="postalCode" class="form-control" name="postalCode"
                                        th:value="${client.getPostalCode()}" th:id="postalCode" th:name="postalCode">
                             </div>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Add/Update</button>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
                             <br/>
                         </form>
                     </div>
@@ -98,7 +98,7 @@
                 <div class="card mb-4 box-shadow">
 
                     <div class="card-header">
-                        <h2 class="my-0 font-weight-normal">Existing Profiles</h2>
+                        <h2 class="my-0 font-weight-normal">Current Profile</h2>
                     </div>
                     <div class="card-body">
                         <div th:each="currentUser : ${adminProfile}" class="row">
@@ -108,33 +108,28 @@
                                     <span id="resEmail" th:text="${currentUser.email}"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="resAddress"><b>Address:</b></label>
                                     <span id="resAddress" th:text="${currentUser.address}"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="resCity"><b>City:</b></label>
                                     <span id="resCity" th:text="${currentUser.city}"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="resCountry"><b>Country:</b></label>
                                     <span id="resCountry" th:text="${currentUser.country}"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="resPostalCode"><b>Postal Code:</b></label>
                                     <span id="resPostalCode" th:text="${currentUser.postalCode}"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-12 text-center">
-                                <div class="alert alert-secondary">
-                                    <p>Current Profile</p>
                                 </div>
                             </div>
                         </div>

@@ -88,9 +88,11 @@ public class ProfileController {
             }
         } else {
             if (br.hasErrors()) {
+                System.out.println(br);
                 return "redirect:/dashboard/profile";
             } else {
                 Profile adminProfile = repo.findByClientId(client.getId());
+                profile.setId(adminProfile.getId());
                 profile.setClientId(client.getId());
                 //Save profile changes to Profiles Table
                 repo.save(profile);
@@ -109,7 +111,6 @@ public class ProfileController {
                 //Sets all profiles to share the client's name and DOB update
                 syncProfileName(client.getId(), client);
             }
-
         }
         return "redirect:/dashboard/profile";
 

@@ -41,10 +41,8 @@ public class Profile {
     @Pattern(regexp = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$")
     private String postalCode;
 
-    @NotNull
     private Boolean prefShipping;
 
-    @NotNull
     private Boolean prefBilling;
 
 
