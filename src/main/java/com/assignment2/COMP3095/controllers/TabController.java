@@ -104,16 +104,6 @@ public class TabController {
         return checkAdminAccess(redirectAttr, "admin/userListing-admin", model, "Clients", session);
     }
 
-    //Admin Listings Tab
-    @RequestMapping(value = "dashboard/admin-listings")
-    public String adminListing(
-            RedirectAttributes redirectAttr,
-            Model model,
-            HttpSession session
-    ) {
-        return checkAdminAccess(redirectAttr, "admin/adminListing-admin", model, "Admins", session);
-    }
-
     //======================================CHECK FUNCTIONS=========================================================//
 
     //function that checks access privileges and reroutes
