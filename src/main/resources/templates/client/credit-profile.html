@@ -73,9 +73,10 @@
                         <h2 class="my-0 font-weight-normal">Existing Cards</h2>
                     </div>
 
+
                     <div class="card-body">
-                        <div class="row">
-                            <div th:each="card : $clientCards" class="col-md-6">
+                        <div th:each="card : ${clientCards}" class="row">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <p><b>Type:</b></p>
                                     <p th:text="${card.cardType}"></p>
@@ -101,7 +102,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

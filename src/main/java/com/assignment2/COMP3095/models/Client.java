@@ -61,7 +61,7 @@ public class Client {
 
     private String role;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

@@ -25,6 +25,8 @@ public class CardService {
 
     public Card findByCardNumber(String cardNumber) {return repo.findByCardNumber(cardNumber);}
 
+    public List<Card> findByClientId(int clientId) { return repo.findByClientId(clientId);};
+
     public void delete(int id){
         repo.deleteById(id);
     }

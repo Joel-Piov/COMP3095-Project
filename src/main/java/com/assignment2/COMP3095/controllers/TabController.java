@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @SessionAttributes("client")
 @Controller
@@ -63,7 +64,8 @@ public class TabController {
     ){
         Client client = (Client) session.getAttribute("client");
         model.addAttribute("card", card);
-        //model.addAttribute("clientCards", cardRepo.listAll(client.getId()));
+        List<Card> clientCardList = cardRepo.findByClientId(client.getId());
+        model.addAttribute("clientCards", clientCardList);
         return checkClientAccess(redirectAttr, "client/credit-profile", model, "Credit Profile", session);
     }
 
