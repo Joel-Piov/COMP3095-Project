@@ -70,9 +70,9 @@
                         <h4 class="my-0 font-weight-normal">Billing & Shipping Information</h4>
                     </div>
                     <div class="card-body">
-                        <div th:each="clientBilling : ${clientBillPref}" class="row">
-                            <div class="col-md-12">
-                                <div class="row">
+                        <div  class="row">
+                            <div  class="col-md-12">
+                                <div th:each="clientBilling : ${clientBillPref}" class="row">
                                     <h3 class="card-title pricing-card-title"><small class="text-muted">Preferred
                                         Billing
                                         Address</small></h3>
@@ -102,14 +102,34 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div th:each="clientShipping : ${clientShipPref}" class="row">
                                     <h3 class="card-title pricing-card-title"><small class="text-muted">Preferred
-                                        Shipping Address</small></h3>
-                                    <ul class="list-unstyled mt-3 mb-4">
-                                        <li>Address:</li>
-                                        <li>City:</li>
-                                        <li>Country:</li>
-                                    </ul>
+                                        Shipping
+                                        Address</small></h3>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="prefShipAddress"><b>Address:</b></label>
+                                            <span id="prefShipAddress" th:text="${clientShipping.address}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="prefShipCity"><b>Address:</b></label>
+                                            <span id="prefShipCity" th:text="${clientShipping.city}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="prefShipCountry"><b>Address:</b></label>
+                                            <span id="prefShipCountry" th:text="${clientShipping.country}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="prefShipPostalCode"><b>Postal Code:</b></label>
+                                            <span id="prefShipPostalCode" th:text="${clientShipping.country}"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
