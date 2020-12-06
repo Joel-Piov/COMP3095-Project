@@ -8,6 +8,7 @@
  *********************************************************************************/
 
 package com.assignment2.COMP3095.controllers;
+
 import com.assignment2.COMP3095.models.Card;
 import com.assignment2.COMP3095.models.Client;
 import com.assignment2.COMP3095.models.Profile;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -38,78 +40,78 @@ public class TabController {
     //======================================SHARED TABS==============================================================//
 
     //Profile Tab ---------> Checks to see if the user is a Client or Admin and provides the correct profile page
-    @RequestMapping(value="dashboard/profile", method = RequestMethod.GET )
+    @RequestMapping(value = "dashboard/profile", method = RequestMethod.GET)
     public String profile(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session,
             Profile profile
-    ){
-        Client client = (Client) session.getAttribute("client");
-        model.addAttribute("profile", profile);
-        List<Profile> clientProfileList = profileRepo.findProfileByClientId(client.getId());
-        model.addAttribute("clientProfiles", clientProfileList);
-        return checkSharedAccess(redirectAttr, "client/profile", "admin/profile-admin", model, "Profile", session);
+    ) {
+        return checkSharedAccess(redirectAttr, "client/profile", "admin/profile-admin", model, "Profile", session, profile);
     }
 
     //Inbox Tab
-    @RequestMapping(value="dashboard/inbox", method = RequestMethod.GET )
+    @RequestMapping(value = "dashboard/inbox", method = RequestMethod.GET)
     public String inbox(
             RedirectAttributes redirectAttr,
             Model model,
-            HttpSession session
-    ){
-        return checkSharedAccess(redirectAttr, "client/inbox","admin/inbox-admin", model, "Inbox", session);
+            HttpSession session,
+            Profile profile
+    ) {
+        return checkSharedAccess(redirectAttr, "client/inbox", "admin/inbox-admin", model, "Inbox", session, profile);
     }
 
     //======================================CLIENT TABS==============================================================//
 
     //Credit Info Tab
-    @RequestMapping(value="dashboard/credit", method = RequestMethod.GET )
+    @RequestMapping(value = "dashboard/credit", method = RequestMethod.GET)
     public String credit(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session,
-            Card card
-    ){
+            Card card,
+            Profile profile,
+            Support support
+    ) {
         Client client = (Client) session.getAttribute("client");
         model.addAttribute("card", card);
         List<Card> clientCardList = cardRepo.findByClientId(client.getId());
         model.addAttribute("clientCards", clientCardList);
-        return checkClientAccess(redirectAttr, "client/credit-profile", model, "Credit Profile", session);
+        return checkClientAccess(redirectAttr, "client/credit-profile", model, "Credit Profile", session, profile, card, support);
     }
 
     //Support Tab
-    @RequestMapping(value="dashboard/support", method = RequestMethod.GET)
+    @RequestMapping(value = "dashboard/support", method = RequestMethod.GET)
     public String support(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session,
-            Support support
-    ){
-        model.addAttribute("support", support);
-        return checkClientAccess(redirectAttr, "client/support", model, "Support", session);
+            Support support,
+            Profile profile,
+            Card card
+    ) {
+        return checkClientAccess(redirectAttr, "client/support", model, "Support", session, profile, card, support);
     }
 
     //======================================ADMIN TABS==============================================================//
 
     //User Listings Tab
-        @RequestMapping(value="dashboard/user-listings", method = RequestMethod.GET)
-        public String userListing(
-                RedirectAttributes redirectAttr,
-                Model model,
-                HttpSession session
-        ){
-            return checkAdminAccess(redirectAttr, "admin/userListing-admin", model, "Clients", session);
-        }
+    @RequestMapping(value = "dashboard/user-listings", method = RequestMethod.GET)
+    public String userListing(
+            RedirectAttributes redirectAttr,
+            Model model,
+            HttpSession session
+    ) {
+        return checkAdminAccess(redirectAttr, "admin/userListing-admin", model, "Clients", session);
+    }
 
     //Admin Listings Tab
-    @RequestMapping(value="dashboard/admin-listings", method = RequestMethod.GET)
+    @RequestMapping(value = "dashboard/admin-listings", method = RequestMethod.GET)
     public String adminListing(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session
-    ){
+    ) {
         return checkAdminAccess(redirectAttr, "admin/adminListing-admin", model, "Admins", session);
     }
 
@@ -121,7 +123,10 @@ public class TabController {
             String viewName,
             Model modelName,
             String tabTitle,
-            HttpSession sessionName
+            HttpSession sessionName,
+            Profile profile,
+            Card card,
+            Support support
     ) {
         Client client = (Client) sessionName.getAttribute("client");
 
@@ -129,8 +134,19 @@ public class TabController {
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;
         } else if (client.getRole().equals("Client")) {
+            List<Profile> clientProfileList = profileRepo.findProfileByClientId(client.getId());
+            List<Card> clientCardList = cardRepo.findByClientId(client.getId());
+
+            modelName.addAttribute("clientProfiles", clientProfileList);
+            modelName.addAttribute("clientCards", clientCardList);
+
             modelName.addAttribute("title", tabTitle);
+            modelName.addAttribute("profile", profile);
+            modelName.addAttribute("card", card);
+            modelName.addAttribute("support", support);
+
             return viewName;
+
         } else {
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;
@@ -159,32 +175,32 @@ public class TabController {
         }
     }
 
-
     private String checkSharedAccess(
-        RedirectAttributes redAtt,
-        String viewNameClient,
-        String viewNameAdmin,
-        Model modelName,
-        String tabTitle,
-        HttpSession sessionName
-    ){
-        Client client = (Client)sessionName.getAttribute("client");
+            RedirectAttributes redAtt,
+            String viewNameClient,
+            String viewNameAdmin,
+            Model modelName,
+            String tabTitle,
+            HttpSession sessionName,
+            Profile profile
+    ) {
+        Client client = (Client) sessionName.getAttribute("client");
 
-        if(client == null){
+        if (client == null) {
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;
-        }
-        else if(client.getRole().equals("Client"))
-        {
+        } else if (client.getRole().equals("Client")) {
+            List<Profile> clientProfileList = profileRepo.findProfileByClientId(client.getId());
+            modelName.addAttribute("clientProfiles", clientProfileList);
+
             modelName.addAttribute("title", tabTitle);
+            modelName.addAttribute("profile", profile);
+
             return viewNameClient;
-        }
-        else if(client.getRole().equals("Admin"))
-        {
+        } else if (client.getRole().equals("Admin")) {
             modelName.addAttribute("title", tabTitle);
             return viewNameAdmin;
-        }
-        else{
+        } else {
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;
         }

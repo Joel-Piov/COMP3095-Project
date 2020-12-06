@@ -9,47 +9,64 @@
 
 package com.assignment2.COMP3095.controllers;
 import com.assignment2.COMP3095.models.Client;
+import com.assignment2.COMP3095.models.Profile;
+import com.assignment2.COMP3095.services.ProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @SessionAttributes("client")
 @Controller
 public class DashboardController {
+
+    @Autowired
+    ProfileService profileRepo;
 
     String redirectUrl = "redirect:/login";
 
     @RequestMapping("/dashboard")
     public String dashboardConfig(
             RedirectAttributes redirectAttr,
-            HttpSession session
+            HttpSession session,
+            Model model
     ){
-        return loginError(redirectAttr, redirectUrl, session);
+        return loginError(redirectAttr, redirectUrl, session, model);
     }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.POST)
     public String dashboardPost(
             RedirectAttributes redirectAttr,
-            HttpSession session
+            HttpSession session,
+            Model model
     ){
-        return loginError(redirectAttr, redirectUrl, session);
+        return loginError(redirectAttr, redirectUrl, session, model);
     }
 
     private String loginError(
             RedirectAttributes redAtt,
             String url,
-            HttpSession sessionName
+            HttpSession sessionName,
+            Model model
     ){
         Client client = (Client) sessionName.getAttribute("client");
+        Profile billingPref = profileRepo.findBillingPrefByClientId(client.getId());
+        Profile shippingPref = profileRepo.findShippingPrefByClientId(client.getId());
+
+        model.addAttribute("clientBillPref", billingPref);
+        model.addAttribute("clientShipPref", shippingPref);
 
         if(client == null){
             redAtt.addFlashAttribute("loginRequired", true);
             return url;
         }
         else if(client.getRole().equals("Client")) {
+
             return "client/dashboard";
         }
         else if(client.getRole().equals("Admin")) {

@@ -13,7 +13,6 @@
                         <h4 class="my-0 font-weight-normal">Recent Activity</h4>
                     </div>
                     <div class="card-body">
-<!--                        <h1 class="card-title pricing-card-title">Future <small class="text-muted">Development</small></h1>-->
                         <h3><small class="text-muted">Last Login Activity</small></h3>
                         <ul class="list-unstyled mt-3 mb-4">
                             <li>Get date</li>
@@ -34,7 +33,6 @@
                         <h4 class="my-0 font-weight-normal">Current Profile</h4>
                     </div>
                     <div class="card-body">
-<!--                        <h3 class="card-title pricing-card-title"><small class="text-muted">Development</small></h3>-->
                         <ul class="list-unstyled mt-3 mb-4">
                             <div>
                                 <li>First Name:</li>
@@ -72,18 +70,49 @@
                         <h4 class="my-0 font-weight-normal">Billing & Shipping Information</h4>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title pricing-card-title"><small class="text-muted">Preferred Billing Address</small></h3>
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>Address: </li>
-                            <li>City: </li>
-                            <li>Country: </li>
-                        </ul>
-                        <h3 class="card-title pricing-card-title"><small class="text-muted">Preferred Shipping Address</small></h3>
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>Address: </li>
-                            <li>City: </li>
-                            <li>Country: </li>
-                        </ul>
+                        <div th:each="clientBilling : ${clientBillPref}" class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <h3 class="card-title pricing-card-title"><small class="text-muted">Preferred
+                                        Billing
+                                        Address</small></h3>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="prefBillAddress"><b>Address:</b></label>
+                                            <span id="prefBillAddress" th:text="${clientBilling.address}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="prefBillCity"><b>Address:</b></label>
+                                            <span id="prefBillCity" th:text="${clientBilling.city}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="prefBillCountry"><b>Address:</b></label>
+                                            <span id="prefBillCountry" th:text="${clientBilling.country}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="prefBillPostalCode"><b>Postal Code:</b></label>
+                                            <span id="prefBillPostalCode" th:text="${clientBilling.country}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <h3 class="card-title pricing-card-title"><small class="text-muted">Preferred
+                                        Shipping Address</small></h3>
+                                    <ul class="list-unstyled mt-3 mb-4">
+                                        <li>Address:</li>
+                                        <li>City:</li>
+                                        <li>Country:</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

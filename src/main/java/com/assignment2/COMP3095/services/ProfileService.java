@@ -30,6 +30,10 @@ public class ProfileService {
 
     public Profile findByPostalCode(String postalCode){ return repo.findByPostalCode(postalCode);}
 
+    public Profile findBillingPrefByClientId(int clientId){return repo.findBillingPrefByClientId(clientId);}
+
+    public Profile findShippingPrefByClientId(int clientId){return repo.findShippingPrefByClientId(clientId);}
+
     public List<Profile> findProfileByClientId(int clientId){
         return repo.findProfileByClientId(clientId);
     }

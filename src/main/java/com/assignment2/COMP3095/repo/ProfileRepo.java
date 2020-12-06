@@ -10,4 +10,9 @@ public interface ProfileRepo extends CrudRepository<Profile, Integer> {
 
     List<Profile> findProfileByClientId(int clientId);
 
+    Profile findBillingPrefByClientId(int clientId);
+
+    Profile findShippingPrefByClientId(int clientId);
+
+
 }
