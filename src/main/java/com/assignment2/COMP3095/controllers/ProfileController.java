@@ -1,27 +1,35 @@
 package com.assignment2.COMP3095.controllers;
 
 
+import com.assignment2.COMP3095.models.Card;
 import com.assignment2.COMP3095.models.Client;
 import com.assignment2.COMP3095.models.Profile;
+import com.assignment2.COMP3095.services.ClientService;
 import com.assignment2.COMP3095.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @SessionAttributes("client")
 @Controller
 public class ProfileController {
     @Autowired
     ProfileService repo;
+    @Autowired
+    ClientService clientRepo;
+
+    @RequestMapping(value = "/dashboard/profile/remove/{id}", method = RequestMethod.GET)
+    public String deleteProfile(@PathVariable int id) {
+        repo.delete(id);
+        return "redirect:/dashboard/profile";
+    }
 
     @RequestMapping(value="/dashboard/profile/add", method= RequestMethod.POST)
     public String addProfile(@Valid @ModelAttribute("profile")Profile profile,
@@ -32,29 +40,57 @@ public class ProfileController {
                              ) {
         Client client = (Client) sessionName.getAttribute("client");
         profile.setClientId(client.getId());
-//        profile.setClientFirstName(client.getFirstName());
-//        profile.setClientLastName(client.getLastName());
-//        profile.setEmail(client.getEmail());
-//        profile.setAddress(client.getAddress());
-//        profile.setCity(client.getCity());
-//        profile.setCountry(client.getCountry());
-//        profile.setPostalCode(client.getPostalCode());
-
 
         if(br.hasErrors()) {
             return "redirect:/profile";
         }
         else{
+            if(profile.getPrefBilling() || profile.getPrefShipping()){
+                //If new profile is new pref, set all others to false
+                if(profile.getPrefBilling() && !profile.getPrefShipping()){
+                    setPreferredBilling(client.getId());
+                }
+                else if(profile.getPrefShipping() && !profile.getPrefBilling()){
+                    setPreferredShipping(client.getId());
+                }
+                else if (profile.getPrefShipping() && profile.getPrefBilling()){
+                    setPreferredBilling(client.getId());
+                    setPreferredShipping(client.getId());
+                }
+            }
+            
             if(repo.findByPostalCode(profile.getPostalCode()) != null){
                 Profile existingProfile = repo.findByPostalCode(profile.getPostalCode());
                 profile.setId(existingProfile.getId());
-                repo.save(profile);
-                return "redirect:/dashboard/profile";
             }
-            else{
-                repo.save(profile);
-                return "redirect:/dashboard/profile";
-            }
+            repo.save(profile);
+            client.setFirstName(profile.getClientFirstName());
+            client.setLastName(profile.getClientLastName());
+            client.setEmail(profile.getEmail());
+            client.setAddress(profile.getAddress());
+            client.setCity(profile.getCity());
+            client.setCountry(profile.getCountry());
+            client.setPostalCode(profile.getPostalCode());
+            clientRepo.save(client);
+            return "redirect:/dashboard/profile";
+        }
+    }
+
+    private void setPreferredBilling(int clientId) {
+        List<Profile> ProfileList = repo.findProfileByClientId(clientId);
+        for (int i = 0; i < ProfileList.size(); i++) {
+            Profile tempProfile = ProfileList.get(i);
+            tempProfile.setPrefBilling(false);
+            repo.save(tempProfile);
+        }
+    }
+
+    private void setPreferredShipping(int clientId) {
+        List<Profile> ProfileList = repo.findProfileByClientId(clientId);
+        for (int i = 0; i < ProfileList.size(); i++) {
+            Profile tempProfile = ProfileList.get(i);
+            tempProfile.setPrefShipping(false);
+            repo.save(tempProfile);
         }
     }
 }

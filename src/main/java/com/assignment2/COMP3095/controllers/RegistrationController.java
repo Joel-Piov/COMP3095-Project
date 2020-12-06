@@ -10,7 +10,9 @@
 
 package com.assignment2.COMP3095.controllers;
 import com.assignment2.COMP3095.models.Client;
+import com.assignment2.COMP3095.models.Profile;
 import com.assignment2.COMP3095.services.ClientService;
+import com.assignment2.COMP3095.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,8 @@ public class RegistrationController {
 
     @Autowired
     ClientService repo;
+    @Autowired
+    ProfileService profileRepo;
 
     @RequestMapping({"/register"})
     public String register(Model model){
@@ -35,7 +39,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public String registerUser(@Valid @ModelAttribute("client") Client client, BindingResult br,
+    public String registerUser(@Valid @ModelAttribute("client") Client client, Profile profile, BindingResult br,
                                @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
                                RedirectAttributes redirectAttr,
                                Model model)
@@ -49,6 +53,17 @@ public class RegistrationController {
                 } else {
                     client.setRole("Client");
                     repo.save(client);
+                    profile.setClientId(client.getId());
+                    profile.setClientFirstName(client.getFirstName());
+                    profile.setClientLastName(client.getLastName());
+                    profile.setEmail(client.getEmail());
+                    profile.setAddress(client.getAddress());
+                    profile.setCity(client.getCity());
+                    profile.setCountry(client.getCountry());
+                    profile.setPostalCode(client.getPostalCode());
+                    profile.setPrefBilling(true);
+                    profile.setPrefShipping(true);
+                    profileRepo.save(profile);
                     redirectAttr.addFlashAttribute("registerSuccess", true);
                     return "redirect:/";
                 }

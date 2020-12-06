@@ -32,11 +32,12 @@ public class CardController {
     @Autowired
     CardService repo;
 
-    @RequestMapping(value = "/dashboard/credit/remove/{id}",method = RequestMethod.GET)
-        public String deleteCard(@PathVariable int id) {
-            repo.delete(id);
-            return "redirect:/dashboard/credit";
-        }
+    @RequestMapping(value = "/dashboard/credit/remove/{id}", method = RequestMethod.GET)
+    public String deleteCard(@PathVariable int id) {
+        repo.delete(id);
+        return "redirect:/dashboard/credit";
+    }
+
 
     @RequestMapping(value = "/dashboard/credit/add", method = RequestMethod.POST)
     public String addCard(@Valid @ModelAttribute("card") Card card,
@@ -49,7 +50,7 @@ public class CardController {
         if (br.hasErrors()) {
             return "redirect:/dashboard/credit";
         } else {
-            if(card.getPrefCard()){
+            if (card.getPrefCard()) {
                 //If card is new pref card set all to false
                 setPreferredCard(client.getId());
             }
@@ -63,9 +64,9 @@ public class CardController {
         }
     }
 
-    private void setPreferredCard(int clientId){
+    private void setPreferredCard(int clientId) {
         List<Card> CardList = repo.findByClientId(clientId);
-        for(int i = 0; i < CardList.size(); i++){
+        for (int i = 0; i < CardList.size(); i++) {
             Card tempCard = CardList.get(i);
             tempCard.setPrefCard(false);
             repo.save(tempCard);

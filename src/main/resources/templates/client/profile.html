@@ -355,6 +355,9 @@
                     </div>
                     <div class="card-body">
                         <div th:each="clientProfile : ${clientProfiles}" class="row">
+                            <div class="col-12">
+                                <a class="btn btn-warning" th:href="@{/dashboard/profile/remove/{id}(id=${clientProfile.id})}">Delete</a>
+                            </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="resEmail"><b>Email</b></label>
@@ -385,18 +388,19 @@
                                     <span id="resPostalCode" th:text="${clientProfile.postalCode}"></span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-12 text-center">
-                            <div th:if="${clientProfile.prefBilling}" class="alert alert-secondary">
-                                <p>This is the preferred billing method.</p>
+                            <div class="col-md-12 text-center">
+                                <div th:if="${clientProfile.prefBilling && clientProfile.prefShipping}"
+                                     class="alert alert-secondary">
+                                    <p>This is the preferred Billing & Shipping method method.</p>
+                                </div>
+                                <div th:if="${clientProfile.prefBilling && !clientProfile.prefShipping}"  class="alert alert-secondary">
+                                    <p>This is the preferred Billing method.</p>
+                                </div>
+                                <div th:if="${clientProfile.prefShipping && !clientProfile.prefBilling}" class="alert alert-secondary">
+                                    <p>This is the preferred Shipping method.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-12 text-center">
-                            <span th:if="${clientProfile.prefShipping}" class="alert alert-secondary">
-                                <p>This is the preferred shipping method.</p>
-                            </span>
-                        </div>
-                        <hr/>
                     </div>
                 </div>
             </div>
