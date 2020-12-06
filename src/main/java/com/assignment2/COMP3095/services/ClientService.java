@@ -26,6 +26,8 @@ public class ClientService {
         return (List<Client>) repo.findAll();
     }
 
+    public List<Client> findByRole(String role){ return (List<Client>) repo.findByRole(role);}
+
     public void save(Client client){
         repo.save(client);
     }
@@ -37,6 +39,7 @@ public class ClientService {
     public void delete(int id){
         repo.deleteById(id);
     }
+
 
     public Client findByEmail(String email){
         return repo.findByEmail(email);

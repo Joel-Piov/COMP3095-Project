@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface SupportRepo extends CrudRepository<Support, Integer> {
 
-    public List<Support> findMessagesByClientId(int clientId);
+    List<Support> findMessagesByClientId(int clientId);
+    List<Support> findMessagesByAdminId(int adminId);
 }

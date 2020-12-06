@@ -10,6 +10,8 @@ public class Support {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    private String caseCode;
+
     @NotNull
     private int clientId;
 
@@ -56,17 +58,11 @@ public class Support {
         this.message = message;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
-    public String getSubject() {
-        return subject;
-    }
+    public String getSubject() { return subject; }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
+    public void setSubject(String subject) { this.subject = subject; }
 
     public int getClientId() {
         return clientId;
@@ -82,6 +78,14 @@ public class Support {
 
     public void setAdminId(int adminId) {
         this.adminId = adminId;
+    }
+
+    public String getCaseCode() {
+        return caseCode;
+    }
+
+    public void setCaseCode(String caseCode) {
+        this.caseCode = caseCode;
     }
 
     public int getId() {

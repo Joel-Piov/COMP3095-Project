@@ -29,8 +29,7 @@ public class SupportService {
         repo.deleteById(id);
     }
 
-    public List<Support> findMessagesByClientId(int clientId){
-        return repo.findMessagesByClientId(clientId);
-    }
+    public List<Support> findMessagesByClientId(int clientId){ return repo.findMessagesByClientId(clientId); }
+    public List<Support> findMessagesByAdminId(int adminId){ return repo.findMessagesByAdminId(adminId); }
 
 }
