@@ -84,4 +84,11 @@ public class Card {
     public void setClientId(int clientId) {
         this.clientId = clientId;
     }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 }

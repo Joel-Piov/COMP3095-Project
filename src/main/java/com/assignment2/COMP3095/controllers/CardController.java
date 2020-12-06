@@ -32,13 +32,16 @@ public class CardController {
                           RedirectAttributes redirectAttr,
                           Model model) {
         Client client = (Client) sessionName.getAttribute("client");
+        card.setClientId((int) client.getId());
         if (br.hasErrors()) {
             return "redirect:/dashboard/credit";
         } else {
             if (repo.findByCardNumber(card.getCardNumber()) != null) {
-                return "redirect:/dashboard";
+                Card existingCard = repo.findByCardNumber(card.getCardNumber());
+                card.setId(existingCard.getId());
+                repo.save(card);
+                return "redirect:/dashboard/credit";
             } else {
-                card.setClientId((int) client.getId());
                 repo.save(card);
                 //redirectAttr.addFlashAttribute("registerSuccess", true);
                 return "redirect:/dashboard/credit";

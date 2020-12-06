@@ -17,8 +17,8 @@ public class CardService {
         return (List<Card>) repo.findAll();
     }
 
-    public void save(Card client){
-        repo.save(client);
+    public void save(Card card){
+        repo.save(card);
     }
 
     public Card get(int cardId){ return repo.findById(cardId).get(); }
