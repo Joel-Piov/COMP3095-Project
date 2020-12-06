@@ -1,8 +1,8 @@
 INSERT INTO client (id, address, city, country, postal_code, email, first_name, last_name, dob, password, role) VALUES
-(1, '123 Test Street', 'Toronto', 'Canada', 'A1A 1A1', 'admin@isp.net', 'John', 'Doe', '1969-01-01', 'P@ssword1', 'Admin');
+(1, '123 Test Street', 'Toronto', 'Canada', 'B1B 1B1', 'admin@isp.net', 'John', 'Doe', '1969-01-01', 'P@ssword1', 'Admin');
 
 INSERT INTO client (id, address, city, country, postal_code, email, first_name, last_name, dob, password, role) VALUES
-(3, '123 Test Street', 'Toronto', 'Canada', 'A1A 1A1', 'DD@isp.net', 'Don', 'Draper', '1969-01-01', 'P@ssword1', 'Admin');
+(3, '123 Test Street', 'Toronto', 'Canada', 'B1B 1B1', 'DD@isp.net', 'Don', 'Draper', '1969-01-01', 'P@ssword1', 'Admin');
 
 INSERT INTO profile (id, address, city, client_first_name, client_id, client_last_name, country,  email, postal_code, pref_billing, pref_shipping) VALUES
 (1, '123 Test Street', 'Toronto', 'John', 1, 'Doe', 'Canada', 'admin@isp.net', 'A1A 1A1', true, true);
