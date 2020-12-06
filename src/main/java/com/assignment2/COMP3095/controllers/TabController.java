@@ -8,7 +8,10 @@
  *********************************************************************************/
 
 package com.assignment2.COMP3095.controllers;
+import com.assignment2.COMP3095.models.Card;
 import com.assignment2.COMP3095.models.Client;
+import com.assignment2.COMP3095.services.CardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,9 @@ import javax.servlet.http.HttpSession;
 @SessionAttributes("client")
 @Controller
 public class TabController {
+
+    @Autowired
+    CardService cardRepo;
 
     String redirectUrl = "redirect:/login";
 
@@ -52,8 +58,12 @@ public class TabController {
     public String credit(
             RedirectAttributes redirectAttr,
             Model model,
-            HttpSession session
+            HttpSession session,
+            Card card
     ){
+        Client client = (Client) session.getAttribute("client");
+        model.addAttribute("card", card);
+        //model.addAttribute("clientCards", cardRepo.listAll(client.getId()));
         return checkClientAccess(redirectAttr, "client/credit-profile", model, "Credit Profile", session);
     }
 

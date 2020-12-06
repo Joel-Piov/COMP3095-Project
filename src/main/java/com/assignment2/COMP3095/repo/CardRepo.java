@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CardRepo extends CrudRepository<Card, Integer>
 {
-
-    Card findById(long id);
+    Card findByCardNumber(String cardNumber);
 
 }

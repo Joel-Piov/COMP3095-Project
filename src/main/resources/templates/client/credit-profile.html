@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
 
@@ -10,7 +11,7 @@
 <h2>Credit Information Profile</h2>
 <div class="container-fluid">
     <div class="row mt-5">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card-deck mb-3 text-center">
                 <div class="card mb-4 box-shadow">
 
@@ -19,40 +20,41 @@
                     </div>
 
                     <div class="card-body">
-                        <form>
+                        <form action="registerCard" th:action="@{/dashboard/credit/add}" th:object="${card}" method="POST">
                             <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label for="mastercard">Master Card</label>
-                                        <input type="radio" id="mastercard" class="form-control" name="mastercard" >
-
-                                        <label for="visa">VISA</label>
-                                        <input type="radio" id="visa" class="form-control" name="visa" >
-
-                                        <label for="amex">American Express</label>
-                                        <input type="radio" id="amex" class="form-control" name="amex" >
+                                <div class="col-md-12">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" id="mastercard" value="Mastercard" th:field="*{cardType}" class="form-check-input" name="cardtype">
+                                        <label class="form-check-label" for="mastercard">Master Card</label>
+                                    </div>
+                                    <div class="form-check  form-check-inline">
+                                        <input type="radio" id="visa" value="Visa" th:field="*{cardType}" class="form-check-input" name="cardtype">
+                                        <label class="form-check-label" for="visa">VISA</label>
+                                    </div>
+                                    <div class="form-check  form-check-inline">
+                                        <input type="radio" id="amex" value="Amex" th:field="*{cardType}" class="form-check-input" name="cardtype">
+                                        <label class="form-check-label" for="amex">American Express</label>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                <label for="expireDate" >Expiration Date</label>
-                                <input type="month" id="expireDate" class="form-control" name="expireDate">
+                                <label for="expireDate">Expiration Date</label>
+                                <input type="month" id="expireDate" th:field="*{expCode}" class="form-control" name="expCode">
                             </div>
 
                             <div class="form-group">
-                                <label for="cardHolder" >Card Holder Name</label>
-                                <input type="text" id="cardHolder" class="form-control" name="cardHolder">
+                                <label for="cardHolder">Card Holder Name</label>
+                                <input type="text" id="cardHolder" th:field="*{cardName}"  class="form-control"  name="cardHolder">
                             </div>
 
                             <div class="form-group">
                                 <label for="ccNumber">Credit Card Number</label>
-                                <input type="text" id="ccNumber" class="form-control" name="ccNumber">
+                                <input type="text" id="ccNumber" th:field="*{cardNumber}" class="form-control" name="cardNumber">
                             </div>
 
                             <div class="form-group">
                                 <label for="preference">Save as Preferred Card</label>
-                                <input type="checkbox" id="preference" class="form-control" name="preference">
+                                <input type="checkbox" id="preference" th:field="*{prefCard}" class="form-control" name="preference">
                             </div>
 
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Add/Update</button>
@@ -63,13 +65,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
-
-<div class="container-fluid">
-    <div class="row mt-5">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card-deck mb-3 text-center">
                 <div class="card mb-4 box-shadow">
 
@@ -79,22 +75,28 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div th:each="card : $clientCards" class="col-md-6">
                                 <div class="form-group">
-                                    <p>Type: </p>
-                                    <p>Mastercard</p>
+                                    <p><b>Type:</b></p>
+                                    <p th:text="${card.cardType}"></p>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <p>Expiry: </p>
-                                    <p>01/2021</p>
+                                    <p><b>Expiry:</b></p>
+                                    <p th:text="${card.expCode}"></p>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <p>Card Holder: </p>
-                                    <p>Jane Smith</p>
+                                    <p><b>Card Holder:</b></p>
+                                    <p th:text="${card.cardName}"></p>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <p>Card Number: </p>
-                                    <p>**** **** **** *999</p>
+                                    <p><b>Card Number:</b></p>
+                                    <p th:text="${card.cardNumber}"></p>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +106,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 

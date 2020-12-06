@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class CardService {
 
     @Autowired
     private CardRepo repo;
 
-    public List<Card> listAll(long userId){
+    public List<Card> listAll(int userId){
         return (List<Card>) repo.findAll();
     }
 
@@ -20,9 +21,9 @@ public class CardService {
         repo.save(client);
     }
 
-    public Card get(int cardId){ return repo.findById(cardId); }
-    //Was     public Card get(int cardId){ return repo.findById(cardId).get(); }
-    // Not sure what .get() did....
+    public Card get(int cardId){ return repo.findById(cardId).get(); }
+
+    public Card findByCardNumber(String cardNumber) {return repo.findByCardNumber(cardNumber);}
 
     public void delete(int id){
         repo.deleteById(id);
