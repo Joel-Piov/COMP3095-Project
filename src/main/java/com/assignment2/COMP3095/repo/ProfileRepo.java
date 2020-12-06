@@ -14,5 +14,6 @@ public interface ProfileRepo extends CrudRepository<Profile, Integer> {
 
     Profile findShippingPrefByClientId(int clientId);
 
+    Profile findByClientId(int clientId);
 
 }

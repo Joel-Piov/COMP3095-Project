@@ -37,4 +37,6 @@ public class ProfileService {
     public List<Profile> findProfileByClientId(int clientId){
         return repo.findProfileByClientId(clientId);
     }
+
+    public Profile findByClientId(int clientId){return repo.findByClientId(clientId);}
 }

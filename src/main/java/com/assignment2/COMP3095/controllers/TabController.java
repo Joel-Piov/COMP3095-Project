@@ -201,6 +201,9 @@ public class TabController {
             return viewNameClient;
         } else if (client.getRole().equals("Admin")) {
             modelName.addAttribute("title", tabTitle);
+            Profile adminProfile = profileRepo.findByClientId(client.getId());
+            modelName.addAttribute("adminProfile", adminProfile);
+
             modelName.addAttribute("profile", profile);
             return viewNameAdmin;
         } else {
