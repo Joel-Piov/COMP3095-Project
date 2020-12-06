@@ -22,6 +22,9 @@ public class Profile {
     @NotNull
     private String clientLastName;
 
+    @NotNull
+    private String clientDateOfBirth;
+
     @NotEmpty(message = "Email field should not be empty")
     @Email(regexp = "^(.+)@(.+)$", message = "Invalid email pattern")
     private String email;
@@ -126,6 +129,14 @@ public class Profile {
 
     public void setClientLastName(String clientLastName) {
         this.clientLastName = clientLastName;
+    }
+
+    public String getClientDateOfBirth() {
+        return clientDateOfBirth;
+    }
+
+    public void setClientDateOfBirth(String clientDateOfBirth) {
+        this.clientDateOfBirth = clientDateOfBirth;
     }
 
     @Override

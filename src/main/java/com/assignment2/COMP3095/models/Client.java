@@ -13,7 +13,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Entity
-@SequenceGenerator(name = "client_id_seq", initialValue = 3, allocationSize = 100)
+@SequenceGenerator(name = "client_id_seq", initialValue = 4, allocationSize = 100)
 public class Client {
 
 
@@ -41,7 +41,7 @@ public class Client {
     private String lastName;
 
     @NotNull
-    private String dob;
+    private String dateOfBirth;
 
     @NotNull
     @Pattern(regexp = "^\\d+\\s[A-z]+\\s[A-z]+$", message = "Invalid Address - (ex: 123 Example Street)")
@@ -136,12 +136,12 @@ public class Client {
         this.country = country;
     }
 
-    public String getDob() {
-        return dob;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
@@ -152,7 +152,7 @@ public class Client {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", date of birth='" + dob + '\'' +
+                ", date of birth='" + dateOfBirth + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +

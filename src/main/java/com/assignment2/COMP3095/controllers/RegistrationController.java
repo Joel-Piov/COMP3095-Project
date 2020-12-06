@@ -63,6 +63,7 @@ public class RegistrationController {
                     profile.setPostalCode(client.getPostalCode());
                     profile.setPrefBilling(true);
                     profile.setPrefShipping(true);
+                    profile.setClientDateOfBirth(client.getDateOfBirth());
                     profileRepo.save(profile);
                     redirectAttr.addFlashAttribute("registerSuccess", true);
                     return "redirect:/";

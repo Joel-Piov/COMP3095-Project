@@ -69,6 +69,7 @@ public class ProfileController {
                 if (repo.findByPostalCode(profile.getPostalCode()) != null) {
                     Profile existingProfile = repo.findByPostalCode(profile.getPostalCode());
                     profile.setId(existingProfile.getId());
+                    profile.setClientDateOfBirth(existingProfile.getClientDateOfBirth());
                 }
                 //updates or saves new profile to profile table, updates current user information to match new profile
                 repo.save(profile);
@@ -84,7 +85,7 @@ public class ProfileController {
                 clientRepo.save(client);
 
                 //Sets all profiles to share the client's name and DOB update
-                syncProfileName(client.getId(), client);
+                syncProfileNameAndDob(client.getId(), client);
             }
         } else {
             if (br.hasErrors()) {
@@ -109,19 +110,20 @@ public class ProfileController {
                 clientRepo.save(client);
 
                 //Sets all profiles to share the client's name and DOB update
-                syncProfileName(client.getId(), client);
+                syncProfileNameAndDob(client.getId(), client);
             }
         }
         return "redirect:/dashboard/profile";
 
     }
 
-    private void syncProfileName(int clientId, Client currClient) {
+    private void syncProfileNameAndDob(int clientId, Client currClient) {
         List<Profile> ProfileList = repo.findProfileByClientId(clientId);
         for (int i = 0; i < ProfileList.size(); i++) {
             Profile tempProfile = ProfileList.get(i);
             tempProfile.setClientFirstName(currClient.getFirstName());
             tempProfile.setClientLastName(currClient.getLastName());
+            tempProfile.setClientDateOfBirth(currClient.getDateOfBirth());
 
             repo.save(tempProfile);
         }

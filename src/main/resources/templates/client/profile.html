@@ -56,6 +56,12 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="dob" class="sr-only">Date of Birth</label>
+                                <input type="date" id="dob" class="form-control" th:value="${client.getDateOfBirth()}"
+                                       th:id="clientDateOfBirth" th:name="clientDateOfBirth">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="address" class="sr-only">Address</label>
                                 <input type="text" id="address" class="form-control" th:value="${client.getAddress()}"
                                        th:id="address" th:name="address">
@@ -111,7 +117,8 @@
                     <div class="card-body">
                         <div th:each="clientProfile : ${clientProfiles}" class="row">
                             <div class="col-12">
-                                <a class="btn btn-warning" th:href="@{/dashboard/profile/remove/{id}(id=${clientProfile.id})}">Delete</a>
+                                <a class="btn btn-warning"
+                                   th:href="@{/dashboard/profile/remove/{id}(id=${clientProfile.id})}">Delete</a>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -148,10 +155,12 @@
                                      class="alert alert-secondary">
                                     <p>This is the preferred Billing & Shipping method method.</p>
                                 </div>
-                                <div th:if="${clientProfile.prefBilling && !clientProfile.prefShipping}"  class="alert alert-secondary">
+                                <div th:if="${clientProfile.prefBilling && !clientProfile.prefShipping}"
+                                     class="alert alert-secondary">
                                     <p>This is the preferred Billing method.</p>
                                 </div>
-                                <div th:if="${clientProfile.prefShipping && !clientProfile.prefBilling}" class="alert alert-secondary">
+                                <div th:if="${clientProfile.prefShipping && !clientProfile.prefBilling}"
+                                     class="alert alert-secondary">
                                     <p>This is the preferred Shipping method.</p>
                                 </div>
                             </div>
