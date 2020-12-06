@@ -1,6 +1,5 @@
 package com.assignment2.COMP3095.controllers;
 
-
 import com.assignment2.COMP3095.models.Card;
 import com.assignment2.COMP3095.models.Client;
 import com.assignment2.COMP3095.models.Profile;
@@ -72,6 +71,7 @@ public class ProfileController {
                 profile.setId(existingProfile.getId());
             }
             repo.save(profile);
+
             client.setFirstName(profile.getClientFirstName());
             client.setLastName(profile.getClientLastName());
             client.setEmail(profile.getEmail());
@@ -79,8 +79,23 @@ public class ProfileController {
             client.setCity(profile.getCity());
             client.setCountry(profile.getCountry());
             client.setPostalCode(profile.getPostalCode());
+
             clientRepo.save(client);
+
+            //Sets all profiles to share the client's name and DOB update
+            syncProfileName(client.getId(), client);
             return "redirect:/dashboard/profile";
+        }
+    }
+
+    private void syncProfileName(int clientId, Client currClient) {
+        List<Profile> ProfileList = repo.findProfileByClientId(clientId);
+        for (int i = 0; i < ProfileList.size(); i++) {
+            Profile tempProfile = ProfileList.get(i);
+            tempProfile.setClientFirstName(currClient.getFirstName());
+            tempProfile.setClientLastName(currClient.getLastName());
+
+            repo.save(tempProfile);
         }
     }
 
