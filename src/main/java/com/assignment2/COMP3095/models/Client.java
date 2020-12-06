@@ -19,7 +19,6 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_id_seq")
-    //@OneToMany(mappedBy="card", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private int id;
 
     @NotEmpty(message = "Email field should not be empty")

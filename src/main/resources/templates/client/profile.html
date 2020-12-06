@@ -10,7 +10,7 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 <div class="container-fluid">
     <div class="row mt-5">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card-deck mb-3 text-center">
                 <div class="card mb-4 box-shadow">
 
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form th:action="@{/edit}" th:object="${client}" method="PUT">
+                        <form action="edit" th:action="@{/dashboard/profile/add}" th:object="${profile}" method="POST">
                             <!--                                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="alert alert-danger"></p>-->
                             <!--                                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger"></p>-->
                             <!--                                <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></p>-->
@@ -31,9 +31,9 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="firstName" class="sr-only">First Name</label>
-                                        <!--                                            <input type="text" id="firstName" th:field="*{firstName}" class="form-control" placeholder="First Name" >-->
                                         <input type="text" id="firstName" class="form-control"
-                                               th:value="${client.getFirstName()}">
+                                               th:value="${client.getFirstName()}" th:id="clientFirstName"
+                                               th:name="clientFirstName">
                                     </div>
                                 </div>
 
@@ -42,7 +42,8 @@
                                         <label for="lastName" class="sr-only">Last Name</label>
                                         <!--                                            <input type="text" id="lastName" th:field="*{lastName}" class="form-control" placeholder="Last Name" >-->
                                         <input type="text" id="lastName" class="form-control"
-                                               th:value="${client.getLastName()}">
+                                               th:value="${client.getLastName()}" th:id="clientLastName"
+                                               th:name="clientLastName">
 
                                     </div>
                                 </div>
@@ -50,28 +51,25 @@
 
                             <div class="form-group">
                                 <label for="inputEmail" class="sr-only">Email address</label>
-                                <input type="email" id="inputEmail" class="form-control"
-                                       th:value="${client.getEmail()}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="dob" class="sr-only">Date of Birth</label>
-                                <input type="date" id="dob" th:value="${client.getDob()}" class="form-control">
+                                <input type="email" id="inputEmail" class="form-control" th:value="${client.getEmail()}"
+                                       th:id="email" th:name="email">
                             </div>
 
                             <div class="form-group">
                                 <label for="address" class="sr-only">Address</label>
-                                <input type="text" id="address" class="form-control" th:value="${client.getAddress()}">
+                                <input type="text" id="address" class="form-control" th:value="${client.getAddress()}"
+                                       th:id="address" th:name="address">
                             </div>
 
                             <div class="form-group">
                                 <label for="city" class="sr-only">City</label>
-                                <input type="text" id="city" class="form-control" th:value="${client.getCity()}">
+                                <input type="text" id="city" class="form-control" th:value="${client.getCity()}"
+                                       th:id="city" th:name="city">
                             </div>
 
                             <div class="form-group">
                                 <label for="country" class="sr-only">Country</label>
-                                <select id="country" name="country">
+                                <select id="country" name="country" th:id="country" th:name="country">
                                     <option th:text="${client.getCountry()}" th:value="${client.getCountry()}"></option>
                                     <option value="Afganistan">Afghanistan</option>
                                     <option value="Albania">Albania</option>
@@ -324,18 +322,20 @@
 
                             <div class="form-group">
                                 <label class="sr-only">Postal Code</label>
-                                <input type="text" id="postalCode" name="postalCode"
-                                       th:value="${client.getPostalCode()}">
+                                <input type="text" id="postalCode" class="form-control" name="postalCode"
+                                       th:value="${client.getPostalCode()}" th:id="postalCode" th:name="postalCode">
                             </div>
 
                             <div class="form-group">
-                                <p class="sr-only">Default Billing Address</p>
-                                <input type="checkbox" id="checkBilling" name="checkBilling">
+                                <label for="prefBilling">Default Billing Address</label>
+                                <input type="checkbox" id="prefBilling" name="prefBilling" th:field="*{prefBilling}"
+                                       class="form-control">
                             </div>
 
                             <div class="form-group">
-                                <p class="sr-only">Default Shipping Address</p>
-                                <input type="checkbox" id="checkShipping" name="checkShipping">
+                                <label for="prefShipping">Default Shipping Address</label>
+                                <input type="checkbox" id="prefShipping" name="prefShipping" th:field="*{prefShipping}"
+                                       class="form-control">
                             </div>
 
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Add/Update</button>
@@ -346,51 +346,63 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
-
-<div class="container-fluid">
-    <div class="row mt-5">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card-deck mb-3 text-center">
                 <div class="card mb-4 box-shadow">
 
                     <div class="card-header">
-                        <h2 class="my-0 font-weight-normal">List Existing Profiles</h2>
+                        <h2 class="my-0 font-weight-normal">Existing Profiles</h2>
                     </div>
-
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-5">
+                        <div th:each="clientProfile : ${clientProfiles}" class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <p>Email: </p>
-                                    <p>client@isp.net</p>
+                                    <label for="resEmail"><b>Email</b></label>
+                                    <span id="resEmail" th:text="${clientProfile.email}"></span>
                                 </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <p>Address: </p>
-                                    <p>123 Test St</p>
+                                    <label for="resAddress"><b>Address:</b></label>
+                                    <span id="resAddress" th:text="${clientProfile.address}"></span>
                                 </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <p>City: </p>
-                                    <p>Toronto</p>
+                                    <label for="resCity"><b>City:</b></label>
+                                    <span id="resCity" th:text="${clientProfile.city}"></span>
                                 </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <p>Country: </p>
-                                    <p>Canada</p>
+                                    <label for="resCountry"><b>Country:</b></label>
+                                    <span id="resCountry" th:text="${clientProfile.country}"></span>
                                 </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <p>Default Shipping: </p>
-                                    <p>Yes</p>
+                                    <label for="resPostalCode"><b>Postal Code:</b></label>
+                                    <span id="resPostalCode" th:text="${clientProfile.postalCode}"></span>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 text-center">
+                            <div th:if="${clientProfile.prefBilling}" class="alert alert-secondary">
+                                <p>This is the preferred billing method.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <span th:if="${clientProfile.prefShipping}" class="alert alert-secondary">
+                                <p>This is the preferred shipping method.</p>
+                            </span>
+                        </div>
+                        <hr/>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 

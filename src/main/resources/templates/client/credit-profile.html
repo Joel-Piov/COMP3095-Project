@@ -21,41 +21,49 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="registerCard" th:action="@{/dashboard/credit/add}" th:object="${card}" method="POST">
+                        <form action="registerCard" th:action="@{/dashboard/credit/add}" th:object="${card}"
+                              method="POST">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-check form-check-inline">
-                                        <input type="radio" id="mastercard" value="Mastercard" th:field="*{cardType}" class="form-check-input" name="cardtype">
+                                        <input type="radio" id="mastercard" value="Mastercard" th:field="*{cardType}"
+                                               class="form-check-input" name="cardtype">
                                         <label class="form-check-label" for="mastercard">Master Card</label>
                                     </div>
                                     <div class="form-check  form-check-inline">
-                                        <input type="radio" id="visa" value="Visa" th:field="*{cardType}" class="form-check-input" name="cardtype">
+                                        <input type="radio" id="visa" value="Visa" th:field="*{cardType}"
+                                               class="form-check-input" name="cardtype">
                                         <label class="form-check-label" for="visa">VISA</label>
                                     </div>
                                     <div class="form-check  form-check-inline">
-                                        <input type="radio" id="amex" value="Amex" th:field="*{cardType}" class="form-check-input" name="cardtype">
+                                        <input type="radio" id="amex" value="Amex" th:field="*{cardType}"
+                                               class="form-check-input" name="cardtype">
                                         <label class="form-check-label" for="amex">American Express</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="expireDate">Expiration Date</label>
-                                <input type="month" id="expireDate" th:field="*{expCode}" class="form-control" name="expCode">
+                                <input type="month" id="expireDate" th:field="*{expCode}" class="form-control"
+                                       name="expCode">
                             </div>
 
                             <div class="form-group">
                                 <label for="cardHolder">Card Holder Name</label>
-                                <input type="text" id="cardHolder" th:field="*{cardName}"  class="form-control"  name="cardHolder">
+                                <input type="text" id="cardHolder" th:field="*{cardName}" class="form-control"
+                                       name="cardHolder">
                             </div>
 
                             <div class="form-group">
                                 <label for="ccNumber">Credit Card Number</label>
-                                <input type="text" id="ccNumber" th:field="*{cardNumber}" class="form-control" name="cardNumber">
+                                <input type="text" id="ccNumber" th:field="*{cardNumber}" class="form-control"
+                                       name="cardNumber">
                             </div>
 
                             <div class="form-group">
                                 <label for="preference">Save as Preferred Card</label>
-                                <input type="checkbox" id="preference" th:field="*{prefCard}" class="form-control" name="preference">
+                                <input type="checkbox" id="preference" th:field="*{prefCard}" class="form-control"
+                                       name="preference">
                             </div>
 
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Add/Update</button>
@@ -75,7 +83,7 @@
                     </div>
 
 
-                    <div class="card-body" >
+                    <div class="card-body">
                         <div th:each="card : ${clientCards}" class="row">
                             <div class="col-12">
                                 <a class="btn btn-warning" th:href="@{/dashboard/credit/remove/{id}(id=${card.id})}">Delete</a>
@@ -106,7 +114,7 @@
                             </div>
                             <div class="col-md-12 text-center">
                                 <div th:if="${card.prefCard}" class="alert alert-secondary">
-                                    <p >This is the preferred card.</p>
+                                    <p>This is the preferred card.</p>
                                 </div>
                             </div>
                             <hr/>

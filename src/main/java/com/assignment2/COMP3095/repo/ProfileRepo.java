@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ProfileRepo extends CrudRepository<Profile, Integer> {
+    Profile findByPostalCode(String postalCode);
 
     List<Profile> findProfileByClientId(int clientId);
 

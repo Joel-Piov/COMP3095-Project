@@ -10,7 +10,9 @@
 package com.assignment2.COMP3095.controllers;
 import com.assignment2.COMP3095.models.Card;
 import com.assignment2.COMP3095.models.Client;
+import com.assignment2.COMP3095.models.Profile;
 import com.assignment2.COMP3095.services.CardService;
+import com.assignment2.COMP3095.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,8 @@ public class TabController {
 
     @Autowired
     CardService cardRepo;
+    @Autowired
+    ProfileService profileRepo;
 
     String redirectUrl = "redirect:/login";
 
@@ -37,8 +41,13 @@ public class TabController {
     public String profile(
             RedirectAttributes redirectAttr,
             Model model,
-            HttpSession session
+            HttpSession session,
+            Profile profile
     ){
+        Client client = (Client) session.getAttribute("client");
+        model.addAttribute("profile", profile);
+        List<Profile> clientProfileList = profileRepo.findProfileByClientId(client.getId());
+        model.addAttribute("clientProfiles", clientProfileList);
         return checkSharedAccess(redirectAttr, "client/profile", "admin/profile-admin", model, "Profile", session);
     }
 

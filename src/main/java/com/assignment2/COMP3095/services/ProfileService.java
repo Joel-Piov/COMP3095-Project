@@ -28,7 +28,9 @@ public class ProfileService {
         repo.deleteById(id);
     }
 
+    public Profile findByPostalCode(String postalCode){ return repo.findByPostalCode(postalCode);}
+
     public List<Profile> findProfileByClientId(int clientId){
-        return findProfileByClientId(clientId);
+        return repo.findProfileByClientId(clientId);
     }
 }
