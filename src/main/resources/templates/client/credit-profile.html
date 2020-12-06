@@ -16,7 +16,8 @@
                 <div class="card mb-4 box-shadow">
 
                     <div class="card-header">
-                        <h2 class="my-0 font-weight-normal">Add New Card</h2>
+                        <h2 class="my-0 font-weight-normal">Add/Update Card</h2>
+                        <small>(Cards with the same number will be updated)</small>
                     </div>
 
                     <div class="card-body">
@@ -74,8 +75,11 @@
                     </div>
 
 
-                    <div class="card-body">
+                    <div class="card-body" >
                         <div th:each="card : ${clientCards}" class="row">
+                            <div class="col-12">
+                                <a class="btn btn-warning" th:href="@{/dashboard/credit/remove/{id}(id=${card.id})}">Delete</a>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <p><b>Type:</b></p>
@@ -100,6 +104,12 @@
                                     <p th:text="${card.cardNumber}"></p>
                                 </div>
                             </div>
+                            <div class="col-md-12 text-center">
+                                <div th:if="${card.prefCard}" class="alert alert-secondary">
+                                    <p >This is the preferred card.</p>
+                                </div>
+                            </div>
+                            <hr/>
                         </div>
                     </div>
                 </div>

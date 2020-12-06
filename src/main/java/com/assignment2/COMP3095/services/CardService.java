@@ -13,7 +13,7 @@ public class CardService {
     @Autowired
     private CardRepo repo;
 
-    public List<Card> listAll(int userId){
+    public List<Card> listAll(){
         return (List<Card>) repo.findAll();
     }
 

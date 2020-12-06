@@ -1,3 +1,12 @@
+/*********************************************************************************
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
+ * Author(s):       Joel Piovesan     Rachel Titco
+ * Student Number:  101221909         101214347
+ * Date: 04/12/2020
+ * Description: Controller that handles adding/updating cards. Cards submitted with an existing card number will updated.
+ *********************************************************************************/
+
 package com.assignment2.COMP3095.controllers;
 
 import com.assignment2.COMP3095.models.Card;
@@ -8,15 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @SessionAttributes("client")
 @Controller
@@ -24,6 +31,12 @@ public class CardController {
 
     @Autowired
     CardService repo;
+
+    @RequestMapping(value = "/dashboard/credit/remove/{id}",method = RequestMethod.GET)
+        public String deleteCard(@PathVariable int id) {
+            repo.delete(id);
+            return "redirect:/dashboard/credit";
+        }
 
     @RequestMapping(value = "/dashboard/credit/add", method = RequestMethod.POST)
     public String addCard(@Valid @ModelAttribute("card") Card card,
@@ -36,17 +49,28 @@ public class CardController {
         if (br.hasErrors()) {
             return "redirect:/dashboard/credit";
         } else {
+            if(card.getPrefCard()){
+                //If card is new pref card set all to false
+                setPreferredCard(client.getId());
+            }
             if (repo.findByCardNumber(card.getCardNumber()) != null) {
+                //if card number exists, update the card
                 Card existingCard = repo.findByCardNumber(card.getCardNumber());
                 card.setId(existingCard.getId());
-                repo.save(card);
-                return "redirect:/dashboard/credit";
-            } else {
-                repo.save(card);
-                //redirectAttr.addFlashAttribute("registerSuccess", true);
-                return "redirect:/dashboard/credit";
             }
+            repo.save(card);
+            return "redirect:/dashboard/credit";
         }
     }
+
+    private void setPreferredCard(int clientId){
+        List<Card> CardList = repo.findByClientId(clientId);
+        for(int i = 0; i < CardList.size(); i++){
+            Card tempCard = CardList.get(i);
+            tempCard.setPrefCard(false);
+            repo.save(tempCard);
+        }
+    }
+
 
 }

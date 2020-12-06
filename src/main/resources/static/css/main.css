@@ -6,3 +6,8 @@ padding-left: 10px;
 padding-right: 10px;
 border-right: 1px solid rgba(255, 255, 255, 0.4);
 }
+
+.card-height{
+    max-height: 30rem;
+    overflow-y: auto;
+}
