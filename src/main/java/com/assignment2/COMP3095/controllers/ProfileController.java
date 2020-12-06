@@ -26,9 +26,17 @@ public class ProfileController {
     ClientService clientRepo;
 
     @RequestMapping(value = "/dashboard/profile/remove/{id}", method = RequestMethod.GET)
-    public String deleteProfile(@PathVariable int id) {
-        repo.delete(id);
-        return "redirect:/dashboard/profile";
+    public String deleteProfile(@PathVariable int id, HttpSession sessionName) {
+        Client client = (Client) sessionName.getAttribute("client");
+        List<Profile> ProfileList = repo.findProfileByClientId(client.getId());
+        if(ProfileList.size() > 1){
+            repo.delete(id);
+            return "redirect:/dashboard/profile";
+        }
+        else{
+            //needs an error message
+            return "redirect:/dashboard/profile";
+        }
     }
 
     @RequestMapping(value="/dashboard/profile/add", method= RequestMethod.POST)
@@ -58,7 +66,7 @@ public class ProfileController {
                     setPreferredShipping(client.getId());
                 }
             }
-            
+
             if(repo.findByPostalCode(profile.getPostalCode()) != null){
                 Profile existingProfile = repo.findByPostalCode(profile.getPostalCode());
                 profile.setId(existingProfile.getId());
