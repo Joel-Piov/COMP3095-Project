@@ -5,6 +5,7 @@ import com.assignment2.COMP3095.models.Client;
 import com.assignment2.COMP3095.models.Support;
 import com.assignment2.COMP3095.repo.SupportRepo;
 import com.assignment2.COMP3095.services.ClientService;
+import com.assignment2.COMP3095.services.SupportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +29,7 @@ import java.util.List;
 public class SupportController {
 
     @Autowired
-    private SupportRepo repo;
+    private SupportService repo;
 
     @Autowired
     private ClientService clientRepo;
@@ -43,6 +44,7 @@ public class SupportController {
         Client client = (Client) sessionName.getAttribute("client");
         support.setClientId(client.getId());
         support.setAdminId(assignSupportToAdmin());
+        support.setDateAdded(currentDate());
         support.setCaseCode(String.valueOf(support.getAdminId()) + makeCaseCode());
         if (br.hasErrors()) {
             return "redirect:/dashboard/profile";
@@ -75,7 +77,14 @@ public class SupportController {
 
     private String makeCaseCode(){
         Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("mm-yy-hh-mm-ss");
+        DateFormat dateFormat = new SimpleDateFormat("MMyyhhmmss");
+        String strDate = dateFormat.format(date);
+        return strDate;
+    }
+
+    private String currentDate(){
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("MMMM dd/yyyy hh:mm");
         String strDate = dateFormat.format(date);
         return strDate;
     }

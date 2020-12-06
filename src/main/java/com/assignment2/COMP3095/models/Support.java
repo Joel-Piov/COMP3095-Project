@@ -10,8 +10,6 @@ public class Support {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String caseCode;
-
     @NotNull
     private int clientId;
 
@@ -34,10 +32,12 @@ public class Support {
     @Size(min = 24, message = "Please elaborate, message too small.")
     private String message;
 
+    private String dateAdded;
+    private String caseCode;
+
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -45,7 +45,6 @@ public class Support {
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -53,21 +52,16 @@ public class Support {
     public String getMessage() {
         return message;
     }
-
     public void setMessage(String message) {
         this.message = message;
     }
 
-    public void setId(int id) { this.id = id; }
-
     public String getSubject() { return subject; }
-
     public void setSubject(String subject) { this.subject = subject; }
 
     public int getClientId() {
         return clientId;
     }
-
     public void setClientId(int clientId) {
         this.clientId = clientId;
     }
@@ -75,7 +69,6 @@ public class Support {
     public int getAdminId() {
         return adminId;
     }
-
     public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
@@ -83,12 +76,15 @@ public class Support {
     public String getCaseCode() {
         return caseCode;
     }
-
     public void setCaseCode(String caseCode) {
         this.caseCode = caseCode;
     }
 
+    public void setId(int id) { this.id = id; }
     public int getId() {
         return id;
     }
+
+    public String getDateAdded() { return dateAdded; }
+    public void setDateAdded(String dateAdded) { this.dateAdded = dateAdded; }
 }

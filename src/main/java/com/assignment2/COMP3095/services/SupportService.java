@@ -3,11 +3,12 @@ package com.assignment2.COMP3095.services;
 import com.assignment2.COMP3095.models.Support;
 import com.assignment2.COMP3095.repo.SupportRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class SupportService {
-
 
 
     @Autowired

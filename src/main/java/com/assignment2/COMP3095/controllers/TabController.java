@@ -13,6 +13,7 @@ import com.assignment2.COMP3095.models.Card;
 import com.assignment2.COMP3095.models.Client;
 import com.assignment2.COMP3095.models.Profile;
 import com.assignment2.COMP3095.models.Support;
+import com.assignment2.COMP3095.repo.SupportRepo;
 import com.assignment2.COMP3095.services.CardService;
 import com.assignment2.COMP3095.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class TabController {
     CardService cardRepo;
     @Autowired
     ProfileService profileRepo;
+    @Autowired
+    private SupportRepo supportRepo;
 
     String redirectUrl = "redirect:/login";
 
@@ -130,11 +133,13 @@ public class TabController {
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;
         } else if (client.getRole().equals("Client")) {
-            List<Profile> clientProfileList = profileRepo.findProfileByClientId(client.getId());
-            List<Card> clientCardList = cardRepo.findByClientId(client.getId());
-
+            int clientId = client.getId();
+            List<Profile> clientProfileList = profileRepo.findProfileByClientId(clientId);
+            List<Card> clientCardList = cardRepo.findByClientId(clientId);
+            List<Support> supportMessageList = supportRepo.findMessagesByClientId(clientId);
             modelName.addAttribute("clientProfiles", clientProfileList);
             modelName.addAttribute("clientCards", clientCardList);
+            modelName.addAttribute("messages", supportMessageList);
 
             modelName.addAttribute("title", tabTitle);
             modelName.addAttribute("profile", profile);
@@ -187,14 +192,16 @@ public class TabController {
             return redirectUrl;
         } else if (client.getRole().equals("Client")) {
             List<Profile> clientProfileList = profileRepo.findProfileByClientId(client.getId());
+            List<Support> supportMessageList = supportRepo.findMessagesByClientId(client.getId());
             modelName.addAttribute("clientProfiles", clientProfileList);
-
+            modelName.addAttribute("messages", supportMessageList);
             modelName.addAttribute("title", tabTitle);
             modelName.addAttribute("profile", profile);
 
             return viewNameClient;
         } else if (client.getRole().equals("Admin")) {
             modelName.addAttribute("title", tabTitle);
+            modelName.addAttribute("profile", profile);
             return viewNameAdmin;
         } else {
             redAtt.addFlashAttribute("loginRequired", true);
