@@ -55,22 +55,25 @@ public class DashboardController {
             Model model
     ){
         Client client = (Client) sessionName.getAttribute("client");
-        Profile billingPref = profileRepo.findBillingPrefByClientId(client.getId());
-        Profile shippingPref = profileRepo.findShippingPrefByClientId(client.getId());
 
-        model.addAttribute("clientBillPref", billingPref);
-        model.addAttribute("clientShipPref", shippingPref);
 
         if(client == null){
             redAtt.addFlashAttribute("loginRequired", true);
             return url;
         }
-        else if(client.getRole().equals("Client")) {
+        else if(client.getRole().equals("Client") || client.getRole().equals("Admin")){
+            Profile billingPref = profileRepo.findBillingPrefByClientId(client.getId());
+            Profile shippingPref = profileRepo.findShippingPrefByClientId(client.getId());
 
-            return "client/dashboard";
-        }
-        else if(client.getRole().equals("Admin")) {
-            return "admin/dashboard-admin";
+            model.addAttribute("clientBillPref", billingPref);
+            model.addAttribute("clientShipPref", shippingPref);
+
+            if(client.getRole().equals("Client")) {
+                return "client/dashboard";
+            }
+            else {
+                return "admin/dashboard-admin";
+            }
         }
         else{
             redAtt.addFlashAttribute("loginRequired", true);

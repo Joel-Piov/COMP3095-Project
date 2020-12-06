@@ -40,7 +40,7 @@ public class TabController {
     //======================================SHARED TABS==============================================================//
 
     //Profile Tab ---------> Checks to see if the user is a Client or Admin and provides the correct profile page
-    @RequestMapping(value = "dashboard/profile", method = RequestMethod.GET)
+    @RequestMapping({"dashboard/profile", "/dashboard/profile/add", "/dashboard/profile/remove/{id}"})
     public String profile(
             RedirectAttributes redirectAttr,
             Model model,
@@ -64,7 +64,7 @@ public class TabController {
     //======================================CLIENT TABS==============================================================//
 
     //Credit Info Tab
-    @RequestMapping(value = "dashboard/credit", method = RequestMethod.GET)
+    @RequestMapping({"dashboard/credit", "/dashboard/credit/add", "/dashboard/credit/remove/{id}"})
     public String credit(
             RedirectAttributes redirectAttr,
             Model model,
@@ -73,15 +73,11 @@ public class TabController {
             Profile profile,
             Support support
     ) {
-        Client client = (Client) session.getAttribute("client");
-        model.addAttribute("card", card);
-        List<Card> clientCardList = cardRepo.findByClientId(client.getId());
-        model.addAttribute("clientCards", clientCardList);
         return checkClientAccess(redirectAttr, "client/credit-profile", model, "Credit Profile", session, profile, card, support);
     }
 
     //Support Tab
-    @RequestMapping(value = "dashboard/support", method = RequestMethod.GET)
+    @RequestMapping({"dashboard/support", "dashboard/support/sendMessage"})
     public String support(
             RedirectAttributes redirectAttr,
             Model model,
@@ -96,7 +92,7 @@ public class TabController {
     //======================================ADMIN TABS==============================================================//
 
     //User Listings Tab
-    @RequestMapping(value = "dashboard/user-listings", method = RequestMethod.GET)
+    @RequestMapping(value = "dashboard/user-listings")
     public String userListing(
             RedirectAttributes redirectAttr,
             Model model,
@@ -106,7 +102,7 @@ public class TabController {
     }
 
     //Admin Listings Tab
-    @RequestMapping(value = "dashboard/admin-listings", method = RequestMethod.GET)
+    @RequestMapping(value = "dashboard/admin-listings")
     public String adminListing(
             RedirectAttributes redirectAttr,
             Model model,
