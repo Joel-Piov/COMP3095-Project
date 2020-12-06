@@ -11,6 +11,7 @@ package com.assignment2.COMP3095.controllers;
 import com.assignment2.COMP3095.models.Card;
 import com.assignment2.COMP3095.models.Client;
 import com.assignment2.COMP3095.models.Profile;
+import com.assignment2.COMP3095.models.Support;
 import com.assignment2.COMP3095.services.CardService;
 import com.assignment2.COMP3095.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,8 +84,10 @@ public class TabController {
     public String support(
             RedirectAttributes redirectAttr,
             Model model,
-            HttpSession session
+            HttpSession session,
+            Support support
     ){
+        model.addAttribute("support", support);
         return checkClientAccess(redirectAttr, "client/support", model, "Support", session);
     }
 
