@@ -50,7 +50,7 @@ public class CardController {
         Client client = (Client) sessionName.getAttribute("client");
         card.setClientId((int) client.getId());
         if (br.hasErrors()) {
-            return "client/credit-profile";
+            return "redirect:/dashboard/credit";
         } else {
             if (card.getPrefCard()) {
                 //If card is new pref card set all to false
