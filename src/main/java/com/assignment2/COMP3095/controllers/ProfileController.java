@@ -50,8 +50,9 @@ public class ProfileController {
         Client client = (Client) sessionName.getAttribute("client");
         profile.setClientId(client.getId());
 
-        if (client.getRole() == "Client") {
+        if (client.getRole().equals("Client")) {
             if (br.hasErrors()) {
+                System.out.println(br);
                 return "redirect:/dashboard/profile";
             } else {
                 if (profile.getPrefBilling() || profile.getPrefShipping()) {
@@ -69,7 +70,6 @@ public class ProfileController {
                 if (repo.findByPostalCode(profile.getPostalCode()) != null) {
                     Profile existingProfile = repo.findByPostalCode(profile.getPostalCode());
                     profile.setId(existingProfile.getId());
-                    profile.setClientDateOfBirth(existingProfile.getClientDateOfBirth());
                 }
                 //updates or saves new profile to profile table, updates current user information to match new profile
                 repo.save(profile);
@@ -81,6 +81,7 @@ public class ProfileController {
                 client.setCity(profile.getCity());
                 client.setCountry(profile.getCountry());
                 client.setPostalCode(profile.getPostalCode());
+                client.setDateOfBirth(profile.getClientDateOfBirth());
 
                 clientRepo.save(client);
 
@@ -106,6 +107,7 @@ public class ProfileController {
                 client.setCity(profile.getCity());
                 client.setCountry(profile.getCountry());
                 client.setPostalCode(profile.getPostalCode());
+                client.setDateOfBirth(profile.getClientDateOfBirth());
 
                 clientRepo.save(client);
 
