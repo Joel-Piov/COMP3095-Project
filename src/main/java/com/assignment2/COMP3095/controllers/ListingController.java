@@ -38,35 +38,35 @@ public class ListingController {
     }
 
     @RequestMapping(value="/dashboard/user-listings/add", method = RequestMethod.POST)
-    public String registerUser(@Valid @ModelAttribute("newAdmin") Client client, Profile profile, BindingResult br,
+    public String registerUser(@Valid @ModelAttribute("newAdmin") Client newAdmin, Profile newProfile, BindingResult br,
                                @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
                                RedirectAttributes redirectAttr,
                                Model model)
     {
-        if(client.getPassword().equals(confirmPassword)) {
+        if(newAdmin.getPassword().equals(confirmPassword)) {
             if (br.hasErrors()) {
                 return "/dashboard/user-listings";
             } else {
                 //checks if user already exists by email
-                if (clientRepo.findByEmail(client.getEmail()) != null) {
+                if (clientRepo.findByEmail(newAdmin.getEmail()) != null) {
                     return "/dashboard/user-listings";
                 } else {
-                    client.setRole("Admin");
-                    client.setRegisterDate(java.time.LocalDate.now());
-                    clientRepo.save(client);
-                    profile.setClientId(client.getId());
-                    profile.setClientFirstName(client.getFirstName());
-                    profile.setClientLastName(client.getLastName());
-                    profile.setEmail(client.getEmail());
-                    profile.setAddress(client.getAddress());
-                    profile.setCity(client.getCity());
-                    profile.setCountry(client.getCountry());
-                    profile.setPostalCode(client.getPostalCode());
-                    profile.setPrefBilling(true);
-                    profile.setPrefShipping(true);
-                    profile.setClientDateOfBirth(client.getDateOfBirth());
-                    profileRepo.save(profile);
-//                    redirectAttr.addFlashAttribute("registerSuccess", true);
+                    newAdmin.setRole("Admin");
+                    newAdmin.setRegisterDate(java.time.LocalDate.now());
+                    clientRepo.save(newAdmin);
+                    newProfile.setClientId(newAdmin.getId());
+                    newProfile.setClientFirstName(newAdmin.getFirstName());
+                    newProfile.setClientLastName(newAdmin.getLastName());
+                    newProfile.setEmail(newAdmin.getEmail());
+                    newProfile.setAddress(newAdmin.getAddress());
+                    newProfile.setCity(newAdmin.getCity());
+                    newProfile.setCountry(newAdmin.getCountry());
+                    newProfile.setPostalCode(newAdmin.getPostalCode());
+                    newProfile.setPrefBilling(true);
+                    newProfile.setPrefShipping(true);
+                    newProfile.setClientDateOfBirth(newAdmin.getDateOfBirth());
+                    profileRepo.save(newProfile);
+                    redirectAttr.addFlashAttribute("registerSuccess", true);
                     return "redirect:/dashboard/user-listings/add";
                 }
             }

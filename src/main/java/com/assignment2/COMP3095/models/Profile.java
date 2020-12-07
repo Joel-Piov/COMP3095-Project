@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 
 
 @Entity
-@SequenceGenerator(name = "profile_id_seq", initialValue = 3, allocationSize = 100)
+@SequenceGenerator(name = "profile_id_seq", initialValue = 4, allocationSize = 100)
 public class Profile {
 
     @Id

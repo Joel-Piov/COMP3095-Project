@@ -169,6 +169,12 @@ public class TabController {
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;
         } else if (client.getRole().equals("Admin")) {
+            Client newAdmin = new Client();
+            Profile newProfile = new Profile();
+
+            modelName.addAttribute("newAdmin", newAdmin);
+            modelName.addAttribute("newProfile", newProfile);
+
             List<Client> clientList = clientRepo.findByRole("Client");
             List<Client> adminList =  clientRepo.findByRole("Admin");
 
