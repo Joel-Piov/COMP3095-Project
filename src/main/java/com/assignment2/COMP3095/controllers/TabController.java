@@ -50,9 +50,10 @@ public class TabController {
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session,
-            Profile profile
+            Profile profile,
+            Support support
     ) {
-        return checkSharedAccess(redirectAttr, "client/profile", "admin/profile-admin", model, "Profile", session, profile);
+        return checkSharedAccess(redirectAttr, "client/profile", "admin/profile-admin", model, "Profile", session, profile, support);
     }
 
     //Inbox Tab
@@ -61,11 +62,24 @@ public class TabController {
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session,
-            Profile profile
+            Profile profile,
+            Support support
     ) {
-        return checkSharedAccess(redirectAttr, "client/inbox", "admin/inbox-admin", model, "Inbox", session, profile);
+        return checkSharedAccess(redirectAttr, "client/inbox", "admin/inbox-admin", model, "Inbox", session, profile, support);
     }
 
+    //Support Tab
+    @RequestMapping({"dashboard/support", "dashboard/support/sendMessage"})
+    public String support(
+            RedirectAttributes redirectAttr,
+            Model model,
+            HttpSession session,
+            Support support,
+            Profile profile,
+            Card card
+    ) {
+        return checkSharedAccess(redirectAttr, "client/support", "admin/inbox-admin", model, "Support", session, profile, support);
+    }
     //======================================CLIENT TABS==============================================================//
 
     //Credit Info Tab
@@ -81,18 +95,7 @@ public class TabController {
         return checkClientAccess(redirectAttr, "client/credit-profile", model, "Credit Profile", session, profile, card, support);
     }
 
-    //Support Tab
-    @RequestMapping({"dashboard/support", "dashboard/support/sendMessage"})
-    public String support(
-            RedirectAttributes redirectAttr,
-            Model model,
-            HttpSession session,
-            Support support,
-            Profile profile,
-            Card card
-    ) {
-        return checkClientAccess(redirectAttr, "client/support", model, "Support", session, profile, card, support);
-    }
+
 
     //======================================ADMIN TABS==============================================================//
 
@@ -195,7 +198,8 @@ public class TabController {
             Model modelName,
             String tabTitle,
             HttpSession sessionName,
-            Profile profile
+            Profile profile,
+            Support support
     ) {
         Client client = (Client) sessionName.getAttribute("client");
 

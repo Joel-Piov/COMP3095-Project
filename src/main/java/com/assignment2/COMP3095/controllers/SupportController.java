@@ -42,11 +42,21 @@ public class SupportController {
                           RedirectAttributes redirectAttr,
                           Model model) {
         Client client = (Client) sessionName.getAttribute("client");
-        //Client id set to 0 when sending --- when recieving will be accurate clientId (to show in inbox)
-        support.setClientId(0);
-        support.setAdminId(assignSupportToAdmin());
+        Support message = (Support) sessionName.getAttribute("viewMessage");
         support.setDateAdded(currentDate());
-        support.setCaseCode(String.valueOf(support.getAdminId()) + makeCaseCode());
+        if(client.getRole().equals("Client"))
+        {
+            //Client id set to 0 when sending --- when recieving will be accurate clientId (to show in inbox)
+            support.setClientId(0);
+            support.setAdminId(assignSupportToAdmin());
+            support.setDateAdded(currentDate());
+            support.setCaseCode(String.valueOf(support.getAdminId()) + makeCaseCode());
+        } else {
+            Client messageFrom = clientRepo.findByEmail(support.getEmail());
+            support.setClientId(messageFrom.getId());
+            support.setAdminId(0);
+            support.setEmail(client.getEmail());
+        }
         if (br.hasErrors()) {
             return "redirect:/dashboard/profile";
         } else {

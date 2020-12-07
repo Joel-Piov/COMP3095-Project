@@ -3,6 +3,7 @@ package com.assignment2.COMP3095.controllers;
 
 import com.assignment2.COMP3095.models.Client;
 import com.assignment2.COMP3095.models.Support;
+import com.assignment2.COMP3095.services.ClientService;
 import com.assignment2.COMP3095.services.SupportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,10 @@ import javax.validation.Valid;
 public class InboxController {
 
     @Autowired
-    private SupportService repo;
+    SupportService repo;
+
+    @Autowired
+    ClientService clientRepo;
 
     @RequestMapping(value = "/dashboard/inbox/remove/{id}", method = RequestMethod.GET)
     public String deleteMessageProcess(@PathVariable int id,

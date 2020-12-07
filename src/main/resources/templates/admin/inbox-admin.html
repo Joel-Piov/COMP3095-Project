@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
 
@@ -28,13 +29,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr  th:each="message : ${messages}">
+                            <tr th:each="message : ${messages}">
                                 <td th:text="${message.caseCode}"></td>
                                 <td th:text="${message.dateAdded}"></td>
-                                <td  th:text="${message.subject}">T</td>
+                                <td th:text="${message.subject}">T</td>
                                 <td>
-                                    <a class="btn btn-secondary" th:href="@{/dashboard/inbox/view/{id}(id=${message.id})}">View</a>
-                                    <a class="btn btn-outline-danger" th:href="@{/dashboard/inbox/remove/{id}(id=${message.id})}">Delete</a>
+                                    <a class="btn btn-secondary"
+                                       th:href="@{/dashboard/inbox/view/{id}(id=${message.id})}">View</a>
+                                    <a class="btn btn-outline-danger"
+                                       th:href="@{/dashboard/inbox/remove/{id}(id=${message.id})}">Delete</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -67,17 +70,55 @@
                                 <p th:text="${viewMessage.message}"></p>
                             </div>
                             <div class="col-12">
-                                <p><b>Message:</b></p>
-                                <a class="btn btn-outline-secondary" th:href="@{/dashboard/inbox/reply/{id}(id=${message.id})}">Reply</a>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Send Reply
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <form  th:action="@{/dashboard/support/sendMessage}" th:object="${support}" method="POST">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="firstName" class="sr-only">First Name</label>
+                                                    <input type="text" id="firstName" th:field="*{firstName}"
+                                                           class="form-control"
+                                                           placeholder="First Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="subject" class="sr-only">Subject</label>
+                                                    <input type="text" id="subject" th:field="*{subject}"
+                                                           class="form-control" placeholder="Subject">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Message</label>
+                                                    <textarea type="text" id="message" th:field="*{message}"
+                                                              class="form-control"
+                                                              placeholder="Enter message here..."></textarea>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" th:value="${viewMessage.caseCode}" name="caseCode" />
+                                            <input type="hidden" th:value="${viewMessage.email}" name="email" />
+                                            <input type="hidden" th:value="${viewMessage.clientId}" name="clientId" />
+                                            <div class="col-md-12">
+                                            <button class="btn btn-secondary" type="submit" >Reply</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <div class="container">
     <div class="row">
