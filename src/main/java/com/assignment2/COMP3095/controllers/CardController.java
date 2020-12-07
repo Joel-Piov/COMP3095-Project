@@ -3,8 +3,9 @@
  * Assignment: Assignment 3
  * Author(s):       Joel Piovesan     Rachel Titco
  * Student Number:  101221909         101214347
- * Date: 04/12/2020
- * Description: Controller that handles adding/updating cards. Cards submitted with an existing card number will updated.
+ * Date: 06/12/2020
+ * Description: Controller that handles adding/updating credit cards. Cards submitted
+ * with an existing card number will updated.
  *********************************************************************************/
 
 package com.assignment2.COMP3095.controllers;

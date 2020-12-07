@@ -1,11 +1,11 @@
 /*********************************************************************************
- * Project: COMP3095 - Assignment 2
- * Assignment: Assignment 2
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
  * Author(s):       Joel Piovesan     Rachel Titco
  * Student Number:  101221909         101214347
- * Date: 07/11/2020
+ * Date: 06/12/2020
  * Description: User class. A user object is created through the login, and compared to Client
- * objects in the database
+ * objects in the database - Unchanged from Assignment 2
  *********************************************************************************/
 
 package com.assignment2.COMP3095.models;

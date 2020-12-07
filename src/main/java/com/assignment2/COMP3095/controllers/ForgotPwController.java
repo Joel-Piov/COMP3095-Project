@@ -1,11 +1,11 @@
 /*********************************************************************************
- * Project: COMP3095 - Assignment 2
- * Assignment: Assignment 2
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
  * Author(s):       Joel Piovesan     Rachel Titco
  * Student Number:  101221909         101214347
- * Date: 07/11/2020
+ * Date: 06/12/2020
  * Description: Controller that handles the form if a user has forgotten their password. User inputs an email that is
- * checked against the database for a matching entry. On success, a recovery email will be sent.
+ * checked against the database for a matching entry. On success, a recovery email will be sent - email hasn't been implemented.
  *********************************************************************************/
 
 package com.assignment2.COMP3095.controllers;

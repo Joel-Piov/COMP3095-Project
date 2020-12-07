@@ -1,10 +1,11 @@
 /*********************************************************************************
- * Project: COMP3095 - Assignment 2
- * Assignment: Assignment 2
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
  * Author(s):       Joel Piovesan     Rachel Titco
  * Student Number:  101221909         101214347
- * Date: 08/11/2020
+ * Date: 06/12/2020
  * Description: Provides error code messages to be returned by the RecaptchaService. Followed a tutorial online.
+ * Unchanged from Assignment 2
  *********************************************************************************/
 package com.assignment2.COMP3095.services;
 

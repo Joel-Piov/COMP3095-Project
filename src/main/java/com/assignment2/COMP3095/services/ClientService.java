@@ -1,10 +1,11 @@
 /*********************************************************************************
- * Project: < project name … >
- * Assignment: Assignment 2
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
  * Author(s):       Joel Piovesan     Rachel Titco
  * Student Number:  101221909         101214347
- * Date: 07/11/2020
- * Description: A class that calls the ClientRepo interface, to access the H2 database entries
+ * Date: 06/12/2020
+ * Description: class that provides functions with which to access the Client (all users)
+ * database and retrieve data by calling its corresponding interface
  *********************************************************************************/
 
 package com.assignment2.COMP3095.services;

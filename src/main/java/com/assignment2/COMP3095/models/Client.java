@@ -1,10 +1,11 @@
 /*********************************************************************************
- * Project: COMP3095 - Assignment 2
- * Assignment: Assignment 2
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
  * Author(s):       Joel Piovesan     Rachel Titco
  * Student Number:  101221909         101214347
- * Date: 07/11/2020
- * Description: Client class. Completion of registration form creates a client object that is input in the database
+ * Date: 06/12/2020
+ * Description: Client class. Completion of registration form creates a Client
+ * object that is input in the database
  *********************************************************************************/
 
 package com.assignment2.COMP3095.models;

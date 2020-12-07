@@ -1,11 +1,11 @@
 /*********************************************************************************
- * Project: COMP3095 - Assignment 2
- * Assignment: Assignment 2
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
  * Author(s):       Joel Piovesan     Rachel Titco
  * Student Number:  101221909         101214347
- * Date: 07/11/2020
+ * Date: 06/12/2020
  * Description: Controller that handles the registration page form, creating a new client entry in the database
- * if all fields have been filled.
+ * if all fields have been filled, and their corresponding profile.
  *********************************************************************************/
 
 package com.assignment2.COMP3095.controllers;

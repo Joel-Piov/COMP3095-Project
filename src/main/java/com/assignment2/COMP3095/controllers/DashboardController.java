@@ -3,8 +3,9 @@
  * Assignment: Assignment 3
  * Author(s):       Joel Piovesan     Rachel Titco
  * Student Number:  101221909         101214347
- * Date: 04/12/2020
+ * Date: 06/12/2020
  * Description: Controller that handles the dashboard view and redirecting to login
+ * if access is denied
  *********************************************************************************/
 
 package com.assignment2.COMP3095.controllers;

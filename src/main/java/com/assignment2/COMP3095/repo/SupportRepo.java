@@ -1,3 +1,13 @@
+/*********************************************************************************
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
+ * Author(s):       Joel Piovesan     Rachel Titco
+ * Student Number:  101221909         101214347
+ * Date: 06/12/2020
+ * Description: Interface where the project may interact with the Support messages
+ * database through functions. Search for messages by Client ID or Admin ID
+ *********************************************************************************/
+
 package com.assignment2.COMP3095.repo;
 
 

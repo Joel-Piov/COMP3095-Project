@@ -1,11 +1,11 @@
 /*********************************************************************************
- * Project: COMP3095 - Assignment 2
- * Assignment: Assignment 2
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
  * Author(s):       Joel Piovesan     Rachel Titco
  * Student Number:  101221909         101214347
- * Date: 08/11/2020
+ * Date: 06/12/2020
  * Description: Gets the secret key from application.properties, sends captcha key from clientside to login controller which decides whether
- * it is a pass(can submit) or a fail(reload page with error).
+ * it is a pass(can submit) or a fail(reload page with error). - Unchanged from Assignment 2
  *********************************************************************************/
 package com.assignment2.COMP3095.services;
 

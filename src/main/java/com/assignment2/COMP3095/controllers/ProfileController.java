@@ -1,3 +1,14 @@
+/*********************************************************************************
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
+ * Author(s):       Joel Piovesan     Rachel Titco
+ * Student Number:  101221909         101214347
+ * Date: 06/12/2020
+ * Description: Controller that handles the routing and logic for Admin and Client
+ * profile CRUD. Users will create new profiles, delete, or update existing entries if
+ * postal codes are found to match
+ *********************************************************************************/
+
 package com.assignment2.COMP3095.controllers;
 
 import com.assignment2.COMP3095.models.Card;
