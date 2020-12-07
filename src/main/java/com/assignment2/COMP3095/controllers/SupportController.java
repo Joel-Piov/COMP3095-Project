@@ -42,7 +42,8 @@ public class SupportController {
                           RedirectAttributes redirectAttr,
                           Model model) {
         Client client = (Client) sessionName.getAttribute("client");
-        support.setClientId(client.getId());
+        //Client id set to 0 when sending --- when recieving will be accurate clientId (to show in inbox)
+        support.setClientId(0);
         support.setAdminId(assignSupportToAdmin());
         support.setDateAdded(currentDate());
         support.setCaseCode(String.valueOf(support.getAdminId()) + makeCaseCode());

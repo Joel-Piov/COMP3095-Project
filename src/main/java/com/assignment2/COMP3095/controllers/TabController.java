@@ -15,6 +15,7 @@ import com.assignment2.COMP3095.models.Profile;
 import com.assignment2.COMP3095.models.Support;
 import com.assignment2.COMP3095.repo.SupportRepo;
 import com.assignment2.COMP3095.services.CardService;
+import com.assignment2.COMP3095.services.ClientService;
 import com.assignment2.COMP3095.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,8 +37,9 @@ public class TabController {
     @Autowired
     ProfileService profileRepo;
     @Autowired
-    private SupportRepo supportRepo;
-
+    SupportRepo supportRepo;
+    @Autowired
+    ClientService clientRepo;
     String redirectUrl = "redirect:/login";
 
     //======================================SHARED TABS==============================================================//
@@ -158,7 +160,12 @@ public class TabController {
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;
         } else if (client.getRole().equals("Admin")) {
+            List<Client> clientList = clientRepo.findByRole("Client");
+            List<Client> adminList =  clientRepo.findByRole("Admin");
             modelName.addAttribute("title", tabTitle);
+            modelName.addAttribute("clientList", clientList);
+            modelName.addAttribute("adminList", adminList);
+
             return viewName;
         } else {
             redAtt.addFlashAttribute("loginRequired", true);

@@ -9,36 +9,32 @@
 <div th:replace="fragments/navbar-admin :: navbar-admin"></div>
 <div class="container-fluid">
     <div class="row mt-5">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card-deck mb-3 text-center">
                 <div class="card mb-4 box-shadow">
+
                     <div class="card-header">
                         <h2 class="my-0 font-weight-normal">Message Inbox</h2>
                     </div>
 
                     <div class="card-body">
-                        <!--                        I KNOW IT'S AN UGLY TABLE, FIGHT ME ABOUT IT -->
-                        <table>
+                        <table class="table">
                             <thead>
                             <tr>
-                                <th>Select</th>
-                                <th>Ticket #</th>
-                                <th>Username</th>
+                                <th>Ticket no.</th>
                                 <th>Date Added</th>
                                 <th>Subject</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>1234</td>
-                                <td>client@isp.net</td>
-                                <td>12/12/2020</td>
-                                <td>This is subject</td>
+                            <tr  th:each="message : ${messages}">
+                                <td th:text="${message.caseCode}"></td>
+                                <td th:text="${message.dateAdded}"></td>
+                                <td  th:text="${message.subject}">T</td>
                                 <td>
-                                    <button>Read</button>
-                                    <button>Delete</button>
+                                    <a class="btn btn-secondary" th:href="@{/dashboard/inbox/view/{id}(id=${message.id})}">View</a>
+                                    <a class="btn btn-warning" th:href="@{/dashboard/inbox/remove/{id}(id=${message.id})}">Delete</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -48,10 +44,37 @@
                 </div>
             </div>
         </div>
+        <div th:if="${viewMessage != null}" class="col-md-6">
+            <div class="card-deck mb-3 text-center">
+                <div class="card mb-4 box-shadow">
+
+                    <div class="card-header">
+                        <h2 class="my-0 font-weight-normal">Case #<span th:text="${viewMessage.caseCode}"></span></h2>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <p><b>Date Added:</b></p>
+                                <p th:text="${viewMessage.dateAdded}"></p>
+                            </div>
+                            <div class="col-12">
+                                <p><b>Subject:</b></p>
+                                <p th:text="${viewMessage.subject}"></p>
+                            </div>
+                            <div class="col-12">
+                                <p><b>Message:</b></p>
+                                <p th:text="${viewMessage.message}"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col-m-4">
