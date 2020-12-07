@@ -29,12 +29,13 @@ public class LogoutController {
 
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request, HttpSession sessionName){
-        Client currentUser = (Client) sessionName.getAttribute("client");
-        currentUser.setLastLoginDate(java.time.LocalDate.now());
-        clientRepo.save(currentUser);
-
         HttpSession session = request.getSession();
-        session.invalidate();
-        return "redirect:/";
+
+            Client currentUser = (Client) sessionName.getAttribute("client");
+            currentUser.setLastLoginDate(java.time.LocalDate.now());
+            clientRepo.save(currentUser);
+
+            session.invalidate();
+            return "redirect:/";
     }
 }
