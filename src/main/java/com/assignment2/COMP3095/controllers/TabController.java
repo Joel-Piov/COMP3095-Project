@@ -171,6 +171,7 @@ public class TabController {
         } else if (client.getRole().equals("Admin")) {
             List<Client> clientList = clientRepo.findByRole("Client");
             List<Client> adminList =  clientRepo.findByRole("Admin");
+
             modelName.addAttribute("title", tabTitle);
             modelName.addAttribute("clientList", clientList);
             modelName.addAttribute("adminList", adminList);
@@ -199,6 +200,7 @@ public class TabController {
         } else if (client.getRole().equals("Client")) {
             List<Profile> clientProfileList = profileRepo.findProfileByClientId(client.getId());
             List<Support> supportMessageList = supportRepo.findMessagesByClientId(client.getId());
+
             modelName.addAttribute("clientProfiles", clientProfileList);
             modelName.addAttribute("messages", supportMessageList);
             modelName.addAttribute("title", tabTitle);
@@ -208,8 +210,9 @@ public class TabController {
         } else if (client.getRole().equals("Admin")) {
             modelName.addAttribute("title", tabTitle);
             Profile adminProfile = profileRepo.findByClientId(client.getId());
+            List<Support> supportMessageList = supportRepo.findMessagesByAdminId(client.getId());
             modelName.addAttribute("adminProfile", adminProfile);
-
+            modelName.addAttribute("messages", supportMessageList);
             modelName.addAttribute("profile", profile);
             return viewNameAdmin;
         } else {

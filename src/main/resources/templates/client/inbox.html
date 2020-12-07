@@ -35,7 +35,7 @@
                                     <td  th:text="${message.subject}">T</td>
                                     <td>
                                         <a class="btn btn-secondary" th:href="@{/dashboard/inbox/view/{id}(id=${message.id})}">View</a>
-                                        <a class="btn btn-warning" th:href="@{/dashboard/inbox/remove/{id}(id=${message.id})}">Delete</a>
+                                        <a class="btn btn-outline-danger" th:href="@{/dashboard/inbox/remove/{id}(id=${message.id})}">Delete</a>
                                     </td>
                                 </tr>
                             </tbody>
