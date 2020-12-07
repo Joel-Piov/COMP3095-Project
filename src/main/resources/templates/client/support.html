@@ -25,14 +25,14 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="firstName" class="sr-only">First Name</label>
-                                        <input type="text" id="firstName"  th:field="*{firstName}" class="form-control"
+                                        <input type="text" id="firstName" readonly th:field="*{firstName}" class="form-control"
                                                placeholder="First Name">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="inputEmail" class="sr-only">Email address</label>
-                                        <input type="email" id="inputEmail"  th:field="*{email}" class="form-control"
+                                        <input type="email" id="inputEmail"  th:value="${client.getEmail()}" name="email" class="form-control"
                                                placeholder="Email address">
                                     </div>
                                 </div>

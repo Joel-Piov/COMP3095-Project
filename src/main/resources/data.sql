@@ -19,3 +19,5 @@ INSERT INTO profile (id, address, city, client_date_of_birth, client_first_name,
 INSERT INTO card (id, card_name, card_number, card_type, client_id, exp_code, pref_card) VALUES
 (1,'Joel Piovesan', '1234567812345678', 'VISA', 2, '2022-10', false);
 
+INSERT INTO support(id, admin_id, case_code, client_id, date_added, email, first_name, message, subject) VALUES
+(1,1,'11220101926',0,'December 06/2020 10:19','client@isp.net', 'Joel', 'We don’t serve their kind here! What? Your droids. They’ll have to wait outside. We don’t want them here. Listen, why don’t you wait out by the speeder. We don’t want any trouble. I heartily agree with you sir.',	'Porknose')
