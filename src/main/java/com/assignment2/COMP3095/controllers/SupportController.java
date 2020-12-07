@@ -1,3 +1,12 @@
+/*********************************************************************************
+ * Project: COMP3095 - Assignment 3
+ * Assignment: Assignment 3
+ * Author(s):       Joel Piovesan     Rachel Titco
+ * Student Number:  101221909         101214347
+ * Date: 04/12/2020
+ * Description: Controller that handles the support requests and sends them to an admin with the lowest amount of messages in queue.
+ *********************************************************************************/
+
 package com.assignment2.COMP3095.controllers;
 
 import com.assignment2.COMP3095.models.Card;

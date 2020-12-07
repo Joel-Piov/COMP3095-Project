@@ -47,9 +47,9 @@
                 </div>
             </div>
         </div>
-        <div th:if="${viewMessage != null}" class="col-md-6">
+        <div class="col-md-6">
             <div class="card-deck mb-3 text-center">
-                <div class="card mb-4 box-shadow">
+                <div  th:if="${viewMessage != null}" class="card mb-4 box-shadow">
 
                     <div class="card-header">
                         <h2 class="my-0 font-weight-normal">Case #<span th:text="${viewMessage.caseCode}"></span></h2>
@@ -80,7 +80,7 @@
                                             aria-expanded="false">
                                         Send Reply
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <div class="dropdown-menu" style="width:40%;" aria-labelledby="dropdownMenuButton">
                                         <form  th:action="@{/dashboard/support/sendMessage}" th:object="${support}" method="POST">
                                             <div class="col-md-12">
                                                 <div class="form-group">
@@ -109,7 +109,7 @@
                                             <input type="hidden" th:value="${viewMessage.email}" name="email" />
                                             <input type="hidden" th:value="${viewMessage.clientId}" name="clientId" />
                                             <div class="col-md-12">
-                                            <button class="btn btn-secondary" type="submit" >Reply</button>
+                                            <button class="btn btn-secondary" type="submit" >Send</button>
                                             </div>
                                         </form>
                                     </div>

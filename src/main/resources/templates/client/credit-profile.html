@@ -23,6 +23,10 @@
                     <div class="card-body">
                         <form action="registerCard" th:action="@{/dashboard/credit/add}" th:object="${card}"
                               method="POST">
+                            <p th:if="${#fields.hasErrors('cardType')}" th:errors="*{cardType}" class="alert alert-danger"></p>
+                            <p th:if="${#fields.hasErrors('expCode')}" th:errors="*{expCode}" class="alert alert-danger"></p>
+                            <p th:if="${#fields.hasErrors('cardName')}" th:errors="*{cardName}" class="alert alert-danger"></p>
+                            <p th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}" class="alert alert-danger"></p>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-check form-check-inline">
