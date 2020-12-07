@@ -63,6 +63,8 @@ public class Client {
 
     private LocalDate lastLoginDate;
 
+    private LocalDate lastProfileUpdate;
+
     private String role;
 
     public int getId() {
@@ -163,6 +165,14 @@ public class Client {
 
     public void setLastLoginDate(LocalDate lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
+    }
+
+    public LocalDate getLastProfileUpdate() {
+        return lastProfileUpdate;
+    }
+
+    public void setLastProfileUpdate(LocalDate lastProfileUpdate) {
+        this.lastProfileUpdate = lastProfileUpdate;
     }
 
     @Override

@@ -93,6 +93,7 @@ public class ProfileController {
                 client.setCountry(profile.getCountry());
                 client.setPostalCode(profile.getPostalCode());
                 client.setDateOfBirth(profile.getClientDateOfBirth());
+                client.setLastProfileUpdate(java.time.LocalDate.now());
 
                 clientRepo.save(client);
 
@@ -119,6 +120,7 @@ public class ProfileController {
                 client.setCountry(profile.getCountry());
                 client.setPostalCode(profile.getPostalCode());
                 client.setDateOfBirth(profile.getClientDateOfBirth());
+                client.setLastProfileUpdate(java.time.LocalDate.now());
 
                 clientRepo.save(client);
 
