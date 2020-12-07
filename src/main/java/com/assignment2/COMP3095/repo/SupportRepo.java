@@ -11,6 +11,7 @@
 package com.assignment2.COMP3095.repo;
 
 
+import com.assignment2.COMP3095.models.Client;
 import com.assignment2.COMP3095.models.Support;
 import org.springframework.data.repository.CrudRepository;
 

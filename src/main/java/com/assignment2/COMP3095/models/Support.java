@@ -14,10 +14,11 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Entity
+@SequenceGenerator(name = "support_id_seq", initialValue = 2, allocationSize = 100)
 public class Support {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "support_id_seq")
     private int id;
 
     @NotNull
