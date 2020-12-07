@@ -61,6 +61,8 @@ public class Client {
 
     private LocalDate registerDate;
 
+    private LocalDate lastLoginDate;
+
     private String role;
 
     public int getId() {
@@ -153,6 +155,14 @@ public class Client {
 
     public void setRegisterDate(LocalDate registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public LocalDate getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(LocalDate lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
     }
 
     @Override

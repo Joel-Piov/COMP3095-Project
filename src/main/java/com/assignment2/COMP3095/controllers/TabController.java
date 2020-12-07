@@ -164,7 +164,6 @@ public class TabController {
             HttpSession sessionName
     ) {
         Client client = (Client) sessionName.getAttribute("client");
-
         if (client == null) {
             redAtt.addFlashAttribute("loginRequired", true);
             return redirectUrl;

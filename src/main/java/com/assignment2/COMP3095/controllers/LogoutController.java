@@ -10,6 +10,9 @@
 
 package com.assignment2.COMP3095.controllers;
 
+import com.assignment2.COMP3095.models.Client;
+import com.assignment2.COMP3095.services.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -21,8 +24,15 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LogoutController {
 
+    @Autowired
+    ClientService clientRepo;
+
     @RequestMapping("/logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request, HttpSession sessionName){
+        Client currentUser = (Client) sessionName.getAttribute("client");
+        currentUser.setLastLoginDate(java.time.LocalDate.now());
+        clientRepo.save(currentUser);
+
         HttpSession session = request.getSession();
         session.invalidate();
         return "redirect:/";

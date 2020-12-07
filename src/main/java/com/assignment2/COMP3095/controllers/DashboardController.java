@@ -11,6 +11,7 @@
 package com.assignment2.COMP3095.controllers;
 import com.assignment2.COMP3095.models.Client;
 import com.assignment2.COMP3095.models.Profile;
+import com.assignment2.COMP3095.services.ClientService;
 import com.assignment2.COMP3095.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,9 @@ public class DashboardController {
 
     @Autowired
     ProfileService profileRepo;
+
+    @Autowired
+    ClientService clientRepo;
 
     String redirectUrl = "redirect:/login";
 
@@ -73,6 +77,9 @@ public class DashboardController {
                 return "client/dashboard";
             }
             else {
+                List<Client> clientList = clientRepo.findByRole("Client");
+                model.addAttribute("clientList", clientList);
+
                 return "admin/dashboard-admin";
             }
         }

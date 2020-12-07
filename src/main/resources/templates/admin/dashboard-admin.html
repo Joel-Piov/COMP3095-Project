@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <h3><small class="text-muted">Last Login Activity</small></h3>
                         <ul class="list-unstyled mt-3 mb-4">
-                            <li>Get date</li>
+                            <p th:text="${client.getLastLoginDate()}"></p>
                         </ul>
                         <h3><small class="text-muted">Number of Registered Users</small></h3>
                         <ul class="list-unstyled mt-3 mb-4">
@@ -95,17 +95,29 @@
                 </div>
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Registered Users List</h4>
+                        <h2 class="my-0 font-weight-normal">Client List</h2>
                     </div>
                     <div class="card-body">
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>Name 1 </li>
-                            <li>Email 1 </li>
-                            <li>Name 2 </li>
-                            <li>Email 2 </li>
-                            <li>Name 3 </li>
-                            <li>Email 3 </li>
-                        </ul>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Last Name</th>
+                                <th>First Name</th>
+                                <th>Role</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="client : ${clientList}">
+                                <td th:text="${client.firstName}"></td>
+                                <td th:text="${client.lastName}"></td>
+                                <td th:text="${client.role}"></td>
+                                <td th:text="${client.email}"></td>
+                                <td th:text="${client.address}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
