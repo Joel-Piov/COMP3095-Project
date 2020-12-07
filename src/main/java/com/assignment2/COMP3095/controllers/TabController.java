@@ -97,13 +97,22 @@ public class TabController {
     //======================================ADMIN TABS==============================================================//
 
     //User Listings Tab
-    @RequestMapping(value = "dashboard/user-listings")
+    @RequestMapping({"dashboard/user-listings", "/dashboard/user-listings/add"})
     public String userListing(
             RedirectAttributes redirectAttr,
             Model model,
             HttpSession session
     ) {
         return checkAdminAccess(redirectAttr, "admin/userListing-admin", model, "Clients", session);
+    }
+
+    @RequestMapping(value="/dashboard/user-listings/add", method = RequestMethod.GET)
+    public String createAdmin(
+            RedirectAttributes redirectAttr,
+            Model model,
+            HttpSession session
+    ) {
+        return checkAdminAccess(redirectAttr, "admin/create-admin", model, "Clients", session);
     }
 
     //======================================CHECK FUNCTIONS=========================================================//
