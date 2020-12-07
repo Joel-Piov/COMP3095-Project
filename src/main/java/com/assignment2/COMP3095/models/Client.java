@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @SequenceGenerator(name = "client_id_seq", initialValue = 4, allocationSize = 100)
 public class Client {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_id_seq")
     private int id;
