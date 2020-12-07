@@ -52,6 +52,7 @@ public class RegistrationController {
                     return "client/register";
                 } else {
                     client.setRole("Client");
+                    client.setRegisterDate(java.time.LocalDate.now());
                     repo.save(client);
                     profile.setClientId(client.getId());
                     profile.setClientFirstName(client.getFirstName());

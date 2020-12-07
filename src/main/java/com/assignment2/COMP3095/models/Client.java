@@ -11,6 +11,7 @@ package com.assignment2.COMP3095.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 
 @Entity
 @SequenceGenerator(name = "client_id_seq", initialValue = 4, allocationSize = 100)
@@ -57,6 +58,8 @@ public class Client {
     @NotNull
     @Pattern(regexp = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$")
     private String postalCode;
+
+    private LocalDate registerDate;
 
     private String role;
 
@@ -142,6 +145,14 @@ public class Client {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public LocalDate getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(LocalDate registerDate) {
+        this.registerDate = registerDate;
     }
 
     @Override
