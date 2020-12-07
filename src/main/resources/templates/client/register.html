@@ -22,8 +22,11 @@
                     <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="alert alert-danger"></p>
                     <p th:if="${#fields.hasErrors('country')}" th:errors="*{country}" class="alert alert-danger"></p>
                     <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></p>
+                    <p th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" class="alert alert-danger"></p>
                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></p>
                     <p th:if="${InvalidConfirm}" class="alert alert-danger">Passwords must match.</p>
+                    <p th:if="${InvalidForm}" class="alert alert-danger">Fields must not be empty.</p>
+
                     <div class="row">
                         <div class="col-md-5">
                             <div class="form-group">

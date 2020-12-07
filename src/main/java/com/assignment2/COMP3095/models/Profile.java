@@ -23,34 +23,38 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profile_id_seq")
     private int id;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     private int clientId;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
+
+    @Pattern(regexp = "^[A-z]+$", message = "First Name must contain only letters (a-Z)")
     private String clientFirstName;
+    @Size(min = 2, max = 32, message = "First Name should be more than 2 characters and less than 32.")
+    @NotEmpty(message = "Field should not be empty")
 
-    @NotNull
+    @Pattern(regexp = "^[A-z]+$", message = "Last Name must contain only letters (a-Z)")
     private String clientLastName;
-
-    @NotNull
+    @Size(min = 2, max = 32, message = "Last Name should be more than 2 characters and less than 32.")
+    @NotEmpty(message = "Field should not be empty")
     private String clientDateOfBirth;
 
-    @NotEmpty(message = "Email field should not be empty")
+    @NotEmpty(message = "Field should not be empty")
     @Email(regexp = "^(.+)@(.+)$", message = "Invalid email pattern")
     private String email;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     @Pattern(regexp = "^\\d+\\s[A-z]+\\s[A-z]+$", message = "Invalid Address - (ex: 123 Example Street)")
     private String address;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     @Size(min = 2, message = "City should be more than 2 characters.")
     private String city;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     private String country;
 
-    @NotNull
+    @NotEmpty(message = "Email field should not be empty")
     @Pattern(regexp = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$")
     private String postalCode;
 

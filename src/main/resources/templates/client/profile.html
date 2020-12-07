@@ -20,12 +20,16 @@
 
                     <div class="card-body">
                         <form action="edit" th:action="@{/dashboard/profile/add}" th:object="${profile}" method="POST">
-                            <!--                                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="alert alert-danger"></p>-->
-                            <!--                                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger"></p>-->
-                            <!--                                <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></p>-->
-                            <!--                                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></p>-->
-                            <!--                                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></p>-->
-                            <!--                                <p th:if="${InvalidConfirm}" class="alert alert-danger">Passwords must match.</p>-->
+                            <p th:if="${#fields.hasErrors('clientFirstName')}" th:errors="*{clientFirstName}" class="alert alert-danger"></p>
+                            <p th:if="${#fields.hasErrors('clientLastName')}" th:errors="*{clientLastName}" class="alert alert-danger"></p>
+                            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></p>
+                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></p>
+                            <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="alert alert-danger"></p>
+                            <p th:if="${#fields.hasErrors('country')}" th:errors="*{country}" class="alert alert-danger"></p>
+                            <p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="alert alert-danger"></p>
+                            <p th:if="${DeleteSuccess}" class="alert alert-danger">Fields must not be empty.</p>
+                            <p th:if="${DeleteError}" class="alert alert-danger">Fields must not be empty.</p>
+
 
                             <div class="row">
                                 <div class="col-md-5">

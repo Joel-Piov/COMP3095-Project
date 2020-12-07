@@ -22,40 +22,40 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_id_seq")
     private int id;
 
-    @NotEmpty(message = "Email field should not be empty")
+    @NotEmpty(message = "Field should not be empty")
     @Email(regexp = "^(.+)@(.+)$", message = "Invalid email pattern")
     private String email;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     @Size(min = 6, max = 12, message = "Password should be between 6 and 12 characters.")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,12}$", message = "Password must contain at least 1 uppercase, 1 special character and 1 number")
     private String password;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     @Size(min = 2, max = 32, message = "First Name should be more than 2 characters and less than 32.")
     @Pattern(regexp = "^[A-z]+$", message = "First Name must contain only letters (a-Z)")
     private String firstName;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     @Size(min = 2, max = 32, message = "Last Name should be more than 2 characters and less than 32.")
     @Pattern(regexp = "^[A-z]+$", message = "Last Name must contain only letters (a-Z)")
     private String lastName;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     private String dateOfBirth;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     @Pattern(regexp = "^\\d+\\s[A-z]+\\s[A-z]+$", message = "Invalid Address - (ex: 123 Example Street)")
     private String address;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     @Size(min = 2, message = "City should be more than 2 characters.")
     private String city;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     private String country;
 
-    @NotNull
+    @NotEmpty(message = "Field should not be empty")
     @Pattern(regexp = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$")
     private String postalCode;
 

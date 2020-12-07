@@ -35,18 +35,16 @@ public class ProfileController {
     @Autowired
     ClientService clientRepo;
 
-    String redirectUrl = "redirect:/login";
-
-
     @RequestMapping(value = "/dashboard/profile/remove/{id}", method = RequestMethod.GET)
-    public String deleteProfile(@PathVariable int id, HttpSession sessionName) {
+    public String deleteProfile(@PathVariable int id, HttpSession sessionName, Model model) {
         Client client = (Client) sessionName.getAttribute("client");
         List<Profile> ProfileList = repo.findProfileByClientId(client.getId());
         if (ProfileList.size() > 1) {
             repo.delete(id);
+            model.addAttribute("DeleteSuccess", true);
             return "redirect:/dashboard/profile";
         } else {
-            //needs an error message
+            model.addAttribute("DeleteError", true);
             return "redirect:/dashboard/profile";
         }
     }
